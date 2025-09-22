@@ -22,13 +22,13 @@ const Button = ({
   const getBtnStyle = (variant: string) => {
     switch (variant) {
       case "primary":
-        return "border border-transparent bg-dark-primary text-white hover:bg-primary/70";
+        return "border border-transparent  bg-linear-to-t from-dark-primary to-accent text-white hover:bg-gradient-to-r";
       case "outline":
-        return "border text-primary border-primary hover:border-primary  hover:bg-primary hover:text-white";
+        return "border text-primary border-primary hover:border-primary  hover:bg-gradient-to-t from-primary to-accent hover:text-white";
       case "danger":
-        return "border border-transparent text-white bg-rose-500 hover:bg-rose-700";
+        return "border border-transparent text-white bg-linear-to-t from-rose-600 to-rose-400 hover:bg-gradient-to-r";
       default:
-        return "bg-cyan-600 text-slate-100  hover:bg-teal-500/90 p-0";
+        return "bg-linear-to-l from-sky-500 to-gray-400 text-slate-100  hover:bg-gradient-to-t p-0";
     }
   };
   return (
@@ -36,7 +36,7 @@ const Button = ({
       onClick={action}
       disabled={disabled}
       type={type}
-      className={`${width} ${fontSize} font-semibold px-3 py-2 rounded-lg disabled:bg-neutral
+      className={`${width} ${fontSize} shadow-lg font-semibold px-3 py-2 rounded-lg disabled:bg-neutral
         duration-500 ease-in-out
         ${getBtnStyle(variant!)}`}
     >
