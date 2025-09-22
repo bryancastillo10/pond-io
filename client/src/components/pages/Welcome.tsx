@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import { ArrowRightToLine } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Welcome = () => {
@@ -11,7 +12,9 @@ const Welcome = () => {
         </p>
         <div className="mt-6">
           <Button>
-            <Link to="/model">Get Started ➡️</Link>
+            <Link className="flex items-center gap-4" to="/model">
+              Get Started <ArrowRightToLine size="24" />
+            </Link>
           </Button>
         </div>
       </div>
