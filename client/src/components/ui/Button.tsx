@@ -22,13 +22,13 @@ const Button = ({
   const getBtnStyle = (variant: string) => {
     switch (variant) {
       case "primary":
-        return "border border-transparent bg-dark-primary text-white hover:bg-primary/70";
+        return "border shadow-xl border-transparent  bg-gradient-to-t from-dark-primary to-accent text-white hover:bg-gradient-to-r";
       case "outline":
         return "border text-primary border-primary hover:border-primary  hover:bg-primary hover:text-white";
       case "danger":
         return "border border-transparent text-white bg-rose-500 hover:bg-rose-700";
       default:
-        return "bg-cyan-600 text-slate-100  hover:bg-teal-500/90 p-0";
+        return "bg-gradient-to-t from-cyan-600 to-slate-400 text-slate-100  hover:bg-gradient-to-r p-0";
     }
   };
   return (

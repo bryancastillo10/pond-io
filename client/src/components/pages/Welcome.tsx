@@ -12,7 +12,7 @@ const Welcome = () => {
           An open-source wastewater treatment plant simulator
         </p>
         <div className="mt-6">
-          <Button>
+          <Button variant="primary">
             <Link className="flex items-center gap-4" to="/model">
               Get Started <ArrowRightToLine size="24" />
             </Link>
