@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
 import {
   MbbrSimulation,
-  SepticTankSimulation,
   AdSimulation,
-  GritChamberSimulation,
-} from "../models/Models";
+  SepticTankSimulation,
+  UasbSimulation,
+} from "@/components/models";
 
 const modelComponents: Record<string, React.JSX.Element> = {
   mbbr: <MbbrSimulation />,
   "septic-tank": <SepticTankSimulation />,
   ad: <AdSimulation />,
-  "grit-chamber": <GritChamberSimulation />,
+  uasb: <UasbSimulation />,
 };
 
 const ModelSimulation = () => {
