@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Oxanium:wght@200..800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Oxanium", "sans-serif";
+  --font-body: "IBM Plex Sans", "sans-serif";
+
+  --color-text: #060708;
+  --color-background: #fbfcfc;
+  --color-dark-background: #020303;
+  --color-primary: #0b7ada;
+  --color-dark-primary: #2593f4;
+  --color-secondary: #aabfd4;
+  --color-accent: #6e9cc4;
+
+  --text-sm: 0.75rem;
+  --text-base: 1rem;
+  --text-xl: 1.333rem;
+  --text-2xl: 1.777rem;
+  --text-3xl: 2.369rem;
+  --text-4xl: 3.158rem;
+  --text-5xl: 4.21rem;
+
+  --font-normal: 400;
+  --font-bold: 700;
+}
+
+@layer base {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+  body {
+    font-family: var(--font-body);
+  }
+}
