@@ -1,10 +1,11 @@
 import Button from "@/components/ui/Button";
 import { ArrowRightToLine } from "lucide-react";
 import { Link } from "react-router-dom";
+import FullWaterWave from "@/components/static/FullWaterWave";
 
 const Welcome = () => {
   return (
-    <div className="w-full h-screen bg-dark-background text-dark-primary">
+    <div className="w-full h-screen relative z-50 bg-dark-background text-dark-primary">
       <div className="flex flex-col h-screen justify-center gap-2 items-center">
         <h1 className="text-5xl font-semibold font-heading italic">Pond.io</h1>
         <p className="font-body text-background text-xl">
@@ -18,6 +19,7 @@ const Welcome = () => {
           </Button>
         </div>
       </div>
+      <FullWaterWave />
     </div>
   );
 };
