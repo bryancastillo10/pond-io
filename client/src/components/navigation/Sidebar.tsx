@@ -1,5 +1,8 @@
 import AppLogo from "@/assets/applogo.png";
-import { FileText, Info, Box } from "lucide-react";
+import { Box, ChevronRight } from "lucide-react";
+
+import { sidebarItems } from "@/components/navigation/sidebaritem";
+import SidebarItem from "@/components/navigation/SidebarItem";
 
 const Sidebar = () => {
   const currentYear = new Date().getFullYear();
@@ -9,19 +12,23 @@ const Sidebar = () => {
       <div className="relative py-8 px-2 flex-grow flex flex-col">
         {/* Sidebar Items */}
         <div className="flex-grow">
-          <div className="flex justify-start items-center px-2 rounded-2xl my-4 w-fit gap-2">
-            <Info size={24} />
-            <span className="font-semibold">About</span>
-          </div>
+          {sidebarItems.map((item) => (
+            <SidebarItem
+              key={item.id}
+              name={item.name}
+              link={item.link}
+              icon={item.icon}
+            />
+          ))}
 
-          <div className="flex justify-start items-center px-2 rounded-2xl my-4 w-fit gap-2">
-            <FileText size={24} />
-            <span className="font-semibold">Docs</span>
-          </div>
-
-          <div className="flex justify-start items-center px-2 rounded-2xl my-4 w-fit gap-2">
-            <Box size={24} />
-            <span className="font-semibold">Models</span>
+          <div className="flex justify-between items-center px-2 rounded-2xl my-4 w-full gap-2">
+            <div className="flex items-center gap-2">
+              <Box size={24} />
+              <p className="font-semibold">Models</p>
+            </div>
+            <div className="mr-2">
+              <ChevronRight />
+            </div>
           </div>
 
           <ul className="flex flex-col gap-2 px-8">
