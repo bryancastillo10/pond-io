@@ -36,7 +36,7 @@ const Button = ({
       onClick={action}
       disabled={disabled}
       type={type}
-      className={`${width} ${fontSize} shadow-lg font-semibold px-3 py-2 rounded-lg disabled:bg-neutral
+      className={`${width} ${fontSize} cursor-pointer shadow-lg font-semibold px-3 py-2 rounded-lg disabled:bg-neutral
         duration-500 ease-in-out
         ${getBtnStyle(variant!)}`}
     >

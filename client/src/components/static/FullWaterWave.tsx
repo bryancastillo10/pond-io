@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import drawWaterWave from "@/graphics/drawWaterWave";
+import drawWaterWave from "@/canvas/drawWaterWave";
 
 const FullWaterWave = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
