@@ -1,4 +1,4 @@
-type WaveParams<T> = {
+export type WaveParams<T> = {
   phase: T;
   amplitude: T;
   frequency: T;
