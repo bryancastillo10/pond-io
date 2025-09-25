@@ -4,9 +4,20 @@ import { Box, ChevronRight } from "lucide-react";
 
 import { sidebarItems, modelItems } from "@/components/navigation/constants";
 import SidebarItem from "@/components/navigation/SidebarItem";
-import ModelItem from "./ModelItem";
+import ModelItem from "@/components/navigation/ModelItem";
+
+import Switch from "@/components/ui/Switch";
+import { useAppSelector, useAppDispatch } from "@/lib/redux/hooks";
+import { setIsDarkMode } from "@/lib/redux/slice/themeSlice";
 
 const Sidebar = () => {
+  const dispatch = useAppDispatch();
+  const darkMode = useAppSelector((state) => state.theme.isDarkMode);
+
+  const toggleSwitch = () => {
+    dispatch(setIsDarkMode(!darkMode));
+  };
+
   const [showModelList, setShowModelList] = useState<boolean>(false);
 
   const currentYear = new Date().getFullYear();
@@ -62,8 +73,12 @@ const Sidebar = () => {
           </ul>
         </div>
 
+        <div className="flex justify-end px-6 my-4">
+          <Switch isOn={darkMode} toggleSwitch={toggleSwitch} />
+        </div>
+
         {/* Sidebar Footer */}
-        <div className="flex justify-start items-center gap-2 mt-auto">
+        <div className="flex justify-start items-center gap-2">
           <img src={AppLogo} alt="logo" className="size-10" />
           <div className="flex flex-col">
             <h1 className="text-xl tracking-wider text-left font-heading">
