@@ -27,7 +27,15 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="flex flex-col transform transition-width duration-500 bg-gradient-to-b from-primary to-accent text-background">
+    <aside
+      className={`flex flex-col transform transition-width duration-500 bg-gradient-to-b
+        ${
+          darkMode
+            ? "from-dark-secondary to-dark-accent text-dark-text"
+            : "from-primary to-accent text-background"
+        }
+      `}
+    >
       <div className="relative py-8 px-2 flex-grow flex flex-col">
         {/* Sidebar Items */}
         <div className="flex-grow">
