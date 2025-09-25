@@ -7,11 +7,17 @@
 
   --color-text: #060708;
   --color-background: #fbfcfc;
-  --color-dark-background: #020303;
+
   --color-primary: #0b7ada;
-  --color-dark-primary: #2593f4;
   --color-secondary: #aabfd4;
   --color-accent: #6e9cc4;
+
+  --color-dark-text: #f6f7f8;
+  --color-dark-background: #020303;
+
+  --color-dark-primary: #2593f4;
+  --color-dark-secondary: #2b4055;
+  --color-dark-accent: #3b6991;
 
   --text-sm: 0.75rem;
   --text-base: 1rem;
