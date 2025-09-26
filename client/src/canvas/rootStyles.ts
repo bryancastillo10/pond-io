@@ -2,9 +2,14 @@ const rootStyles = window.getComputedStyle(document.documentElement);
 
 const bodyFont = rootStyles.getPropertyValue("--font-body");
 
-const textColor = rootStyles.getPropertyValue("--color-text");
+function getTextColor(isDarkMode: boolean) {
+  const styles = window.getComputedStyle(document.documentElement);
+  return isDarkMode
+    ? styles.getPropertyValue("--color-dark-text").trim()
+    : styles.getPropertyValue("--color-text").trim();
+}
 
-const labelFont = `16px ${bodyFont}`;
-const pipeLabelFont = `14px ${bodyFont}`;
+const labelFont = `18px ${bodyFont}`;
+const pipeLabelFont = `18px ${bodyFont}`;
 
-export { textColor, labelFont, pipeLabelFont };
+export { getTextColor, labelFont, pipeLabelFont };

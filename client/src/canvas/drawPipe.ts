@@ -1,5 +1,5 @@
 import drawTextLabel from "@/canvas/drawTextLabel";
-import { pipeLabelFont, textColor } from "@/canvas/rootStyles";
+import { pipeLabelFont, getTextColor } from "@/canvas/rootStyles";
 
 export default function drawPipe(
   ctx: CanvasRenderingContext2D,
@@ -9,6 +9,7 @@ export default function drawPipe(
   endY: number,
   label: string = "",
   labelOffset: number = 10,
+  isDarkMode: boolean,
   pipeLength?: number
 ) {
   ctx.strokeStyle = "#555";
@@ -57,7 +58,7 @@ export default function drawPipe(
       midY - labelOffset,
       pipeLabelFont,
       "center",
-      textColor
+      getTextColor(isDarkMode)
     );
   }
 }

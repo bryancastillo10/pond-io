@@ -1,4 +1,5 @@
 import { useRef, useCallback, useEffect } from "react";
+import { useAppSelector } from "@/lib/redux/hooks";
 
 import {
   drawPipe,
@@ -6,9 +7,10 @@ import {
   drawClarifier,
   drawBiofilmCarriers,
 } from "@/canvas";
-import { textColor, labelFont } from "@/canvas/rootStyles";
+import { getTextColor, labelFont } from "@/canvas/rootStyles";
 
 const useMBBRDiagram = () => {
+  const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
   const mbbrRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | null>(null);
 
@@ -69,7 +71,17 @@ const useMBBRDiagram = () => {
     // 1. Influent Pipe
     const influentX = centerXOffset;
     const influentY = padding + unitHeight / 2;
-    drawPipe(ctx, influentX, influentY, padding, influentY, "Influent", 10, 80);
+    drawPipe(
+      ctx,
+      influentX,
+      influentY,
+      padding,
+      influentY,
+      "Influent",
+      10,
+      isDarkMode,
+      80
+    );
 
     // 2. BOD Removal Tank (First Stage)
     const bodRemovalX = influentX + padding;
@@ -84,7 +96,8 @@ const useMBBRDiagram = () => {
       "BOD Removal",
       waterLevel,
       "#6e9cc4",
-      wavePropsRef.current.bodRemoval
+      wavePropsRef.current.bodRemoval,
+      isDarkMode
     );
 
     // Draw biofilm carriers in BOD removal tank
@@ -108,7 +121,8 @@ const useMBBRDiagram = () => {
       pipe1StartX + padding,
       pipe1StartY,
       "",
-      10
+      10,
+      isDarkMode
     );
 
     // 4. Nitrification Tank (Second Stage)
@@ -124,7 +138,8 @@ const useMBBRDiagram = () => {
       "Nitrification",
       waterLevel,
       "#98FB98",
-      wavePropsRef.current.nitrification
+      wavePropsRef.current.nitrification,
+      isDarkMode
     );
 
     // Draw biofilm carriers in nitrification tank
@@ -151,6 +166,7 @@ const useMBBRDiagram = () => {
       clarifierY,
       "",
       10,
+      isDarkMode,
       115
     );
 
@@ -166,16 +182,26 @@ const useMBBRDiagram = () => {
       "#0b7ada",
       wavePropsRef.current.clarifier,
       labelFont,
-      textColor
+      getTextColor(isDarkMode)
     );
 
     // 7. Effluent Pipe
     const effluentX = clarifierX + 40;
     const effluentY = clarifierY;
-    drawPipe(ctx, effluentX, effluentY, width, effluentY, "Effluent", 10, 100);
+    drawPipe(
+      ctx,
+      effluentX,
+      effluentY,
+      width,
+      effluentY,
+      "Effluent",
+      10,
+      isDarkMode,
+      100
+    );
 
     animationFrameId.current = window.requestAnimationFrame(drawDiagram);
-  }, []);
+  }, [isDarkMode]);
 
   useEffect(() => {
     drawDiagram();

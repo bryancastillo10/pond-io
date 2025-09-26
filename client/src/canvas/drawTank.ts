@@ -1,7 +1,7 @@
 import { drawWaterWave, drawTextLabel } from "@/canvas";
 
 import type { WaveParams } from "@/canvas/drawWaterWave";
-import { labelFont, textColor } from "@/canvas/rootStyles";
+import { labelFont, getTextColor } from "@/canvas/rootStyles";
 
 export default function drawTank(
   ctx: CanvasRenderingContext2D,
@@ -13,7 +13,8 @@ export default function drawTank(
   label: string,
   waterLevel: number,
   waveColor: string,
-  waveDetails: WaveParams<number>
+  waveDetails: WaveParams<number>,
+  isDarkMode: boolean
 ) {
   // Draw tank outline
   ctx.fillStyle = tankColor;
@@ -33,6 +34,6 @@ export default function drawTank(
     y + height + 20,
     labelFont,
     "center",
-    textColor
+    getTextColor(isDarkMode)
   );
 }
