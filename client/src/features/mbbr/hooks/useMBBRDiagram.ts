@@ -37,7 +37,7 @@ const useMBBRDiagram = () => {
 
     ctx.clearRect(0, 0, width, height);
 
-    const unitHeight = 150;
+    const unitHeight = 200;
     const unitWidth = 200;
     const padding = 80;
     const waterLevel = 120;
@@ -59,11 +59,9 @@ const useMBBRDiagram = () => {
       carrierPropsRef.current.nitrification.speed;
 
     const totalDiagramWidth =
-      padding +
       unitWidth +
-      padding +
       unitWidth +
-      padding +
+      padding * 2 +
       clarifierRadius * 2 +
       effluentPipeLength;
     const centerXOffset = (width - totalDiagramWidth) / 2;
@@ -167,7 +165,7 @@ const useMBBRDiagram = () => {
       "",
       10,
       isDarkMode,
-      115
+      130
     );
 
     // 6. Clarifier
@@ -186,7 +184,7 @@ const useMBBRDiagram = () => {
     );
 
     // 7. Effluent Pipe
-    const effluentX = clarifierX + 40;
+    const effluentX = clarifierX + 50;
     const effluentY = clarifierY;
     drawPipe(
       ctx,

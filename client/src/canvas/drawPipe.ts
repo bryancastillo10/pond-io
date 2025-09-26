@@ -12,7 +12,7 @@ export default function drawPipe(
   isDarkMode: boolean,
   pipeLength?: number
 ) {
-  ctx.strokeStyle = "#555";
+  ctx.strokeStyle = getTextColor(isDarkMode) || "#555";
   ctx.lineWidth = 4;
 
   const arrowLength = 20;
@@ -44,7 +44,7 @@ export default function drawPipe(
   ctx.lineTo(-arrowLength, arrowWidth / 2);
   ctx.lineTo(-arrowLength, -arrowWidth / 2);
   ctx.closePath();
-  ctx.fillStyle = "#555";
+  ctx.fillStyle = getTextColor(isDarkMode) || "#555";
   ctx.fill();
   ctx.restore();
 
