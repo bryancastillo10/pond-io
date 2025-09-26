@@ -2,8 +2,16 @@ import useMBBRDiagram from "@/features/mbbr/hooks/useMBBRDiagram";
 import Button from "@/components/ui/Button";
 import { Pencil, Play } from "lucide-react";
 
+import useDrawer from "@/lib/drawer-ui/useDrawer";
+
 const Diagram = () => {
+  const { handleOpenDrawer } = useDrawer();
+
   const { mbbrRef } = useMBBRDiagram();
+
+  const openFirstStageForm = () => {
+    handleOpenDrawer("BOD Removal Unit", "FirstStageForm");
+  };
 
   return (
     <div className="relative rounded-lg border shadow-md my-2 w-full h-[75vh] mx-auto flex justify-center items-center">
@@ -15,7 +23,7 @@ const Diagram = () => {
       </div>
 
       <div className="absolute top-20 left-70">
-        <Button variant="outline">
+        <Button action={() => openFirstStageForm()} variant="outline">
           <Pencil size={18} />
         </Button>
       </div>
