@@ -1,4 +1,5 @@
 import drawTextLabel from "@/canvas/drawTextLabel";
+import { pipeLabelFont, getTextColor } from "@/canvas/rootStyles";
 
 export default function drawPipe(
   ctx: CanvasRenderingContext2D,
@@ -8,15 +9,44 @@ export default function drawPipe(
   endY: number,
   label: string = "",
   labelOffset: number = 10,
-  labelFont: string,
-  labelColor: string
+  isDarkMode: boolean,
+  pipeLength?: number
 ) {
-  ctx.strokeStyle = "#060708";
-  ctx.lineWidth = 5;
+  ctx.strokeStyle = getTextColor(isDarkMode) || "#555";
+  ctx.lineWidth = 4;
+
+  const arrowLength = 20;
+  const arrowWidth = 12;
+  const angle = Math.atan2(endY - startY, endX - startX);
+
+  // If pipeLength provided, override endX/endY
+  if (pipeLength !== undefined) {
+    endX = startX + Math.cos(angle) * pipeLength;
+    endY = startY + Math.sin(angle) * pipeLength;
+  }
+
+  const pipeEndX = endX - Math.cos(angle) * arrowLength;
+  const pipeEndY = endY - Math.sin(angle) * arrowLength;
+
+  // Draw pipe line
   ctx.beginPath();
   ctx.moveTo(startX, startY);
-  ctx.lineTo(endX, endY);
+  ctx.lineTo(pipeEndX, pipeEndY);
   ctx.stroke();
+
+  // Arrowhead
+  ctx.save();
+  ctx.translate(endX, endY);
+  ctx.rotate(angle);
+
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(-arrowLength, arrowWidth / 2);
+  ctx.lineTo(-arrowLength, -arrowWidth / 2);
+  ctx.closePath();
+  ctx.fillStyle = getTextColor(isDarkMode) || "#555";
+  ctx.fill();
+  ctx.restore();
 
   if (label) {
     const midX = (startX + endX) / 2;
@@ -26,9 +56,9 @@ export default function drawPipe(
       label,
       midX,
       midY - labelOffset,
-      labelFont,
+      pipeLabelFont,
       "center",
-      labelColor
+      getTextColor(isDarkMode)
     );
   }
 }
