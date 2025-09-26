@@ -5,7 +5,7 @@ import {
   drawClarifier,
   drawBiofilmCarriers,
 } from "@/canvas";
-import { textColor, labelFont, pipeLabelFont } from "@/canvas/rootStyles";
+import { textColor, labelFont } from "@/canvas/rootStyles";
 
 const MbbrSimulation = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -54,22 +54,12 @@ const MbbrSimulation = () => {
       carrierPropsRef.current.nitrification.speed;
 
     // 1. Influent Pipe
-    const influentX = 0;
+    const influentX = 10;
     const influentY = padding + unitHeight / 2;
-    drawPipe(
-      ctx,
-      influentX,
-      influentY,
-      padding,
-      influentY,
-      "Influent",
-      10,
-      pipeLabelFont,
-      textColor
-    );
+    drawPipe(ctx, influentX, influentY, padding, influentY, "Influent", 10, 80);
 
     // 2. BOD Removal Tank (First Stage)
-    const bodRemovalX = padding;
+    const bodRemovalX = padding + 40;
     const bodRemovalY = padding;
     drawTank(
       ctx,
@@ -105,9 +95,7 @@ const MbbrSimulation = () => {
       pipe1StartX + padding,
       pipe1StartY,
       "",
-      10,
-      pipeLabelFont,
-      textColor
+      10
     );
 
     // 4. Nitrification Tank (Second Stage)
@@ -150,9 +138,7 @@ const MbbrSimulation = () => {
       clarifierX - clarifierRadius,
       clarifierY,
       "",
-      10,
-      pipeLabelFont,
-      textColor
+      10
     );
 
     // 6. Clarifier
@@ -173,17 +159,7 @@ const MbbrSimulation = () => {
     // 7. Effluent Pipe
     const effluentX = clarifierX + clarifierRadius;
     const effluentY = clarifierY;
-    drawPipe(
-      ctx,
-      effluentX,
-      effluentY,
-      width,
-      effluentY,
-      "Effluent",
-      10,
-      pipeLabelFont,
-      textColor
-    );
+    drawPipe(ctx, effluentX, effluentY, width, effluentY, "Effluent", 10, 120);
 
     animationFrameId.current = window.requestAnimationFrame(drawDiagram);
   }, []);
