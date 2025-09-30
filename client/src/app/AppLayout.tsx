@@ -9,8 +9,10 @@ const AppLayout = () => {
     <div className="flex overflow-x-auto duration-500 ease-in-out w-full h-screen">
       <Sidebar />
       <ThemeProvider>
-        <Drawer />
-        <Outlet />
+        <section className="flex-1 overflow-auto">
+          <Drawer />
+          <Outlet />
+        </section>
       </ThemeProvider>
     </div>
   );
