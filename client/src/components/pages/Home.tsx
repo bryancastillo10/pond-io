@@ -16,7 +16,7 @@ const Home = () => {
         inputs.
       </p>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 w-fit">
         {modelsList.map((model) => (
           <Card
             key={model.id}
