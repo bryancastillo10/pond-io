@@ -49,12 +49,12 @@ const Card = ({
               </span>
             </div>
 
-            <div className="h-18">
+            <div className="">
               <h4 className="text-sm font-semibold">Expected Results:</h4>
               <ul className="grid grid-cols-2">
                 {expectedResults.map((result, index) => (
                   <li key={index} className="text-sm flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                    <span className="size-1.5 bg-primary rounded-full"></span>
                     {result}
                   </li>
                 ))}
