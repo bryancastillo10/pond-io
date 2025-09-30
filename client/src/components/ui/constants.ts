@@ -7,6 +7,7 @@ export const modelsList = [
     description:
       "A biological wastewater treatment process that uses free-floating plastic carriers with high surface area for biofilm growth. The carriers move freely in the reactor, providing efficient organic matter and nitrogen removal through aerobic biological processes",
     category: "Biological Treatment",
+    link: "/model/mbbr",
     expectedResults: [
       "Loading Rates",
       "Tank Volumes",
@@ -23,6 +24,7 @@ export const modelsList = [
     description:
       "A biochemical process where microorganisms break down organic matter (sludge, biosolids) in the absence of oxygen. The primary outputs are treated solids and valuable biogas (primarily methane and carbon dioxide).",
     category: "Sludge & Resource Recovery",
+    link: "/model/ad",
     expectedResults: [
       "Volatile Solids Reduction",
       "Biogas Production Rate",
@@ -39,6 +41,7 @@ export const modelsList = [
     description:
       "A decentralized on-site wastewater treatment system that uses settling and anaerobic processes to treat sewage from individual homes or small communities. Solids settle to the bottom as sludge, and effluent flows to a drainfield.",
     category: "Preliminary Treatment",
+    link: "/model/septic-tank",
     expectedResults: [
       "Tank Volume & Dimensions",
       "Hydraulic Retention Time",
@@ -55,6 +58,7 @@ export const modelsList = [
     description:
       "A high-rate anaerobic treatment system that uses a dense blanket of microbial granules to treat wastewater flowing upwards. This system is energy-efficient and highly effective for organic removal in warm climates or industrial applications.",
     category: "Biological Treatment",
+    link: "/model/uasb",
     expectedResults: [
       "Sludge Bed Velocity",
       "Organic Loading Rate (OLR)",
