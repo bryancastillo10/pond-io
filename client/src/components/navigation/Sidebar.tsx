@@ -28,7 +28,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`h-[1000px] flex flex-col transform transition-width duration-500 bg-gradient-to-b
+      className={`flex flex-col transform transition-width duration-500 bg-gradient-to-b
         ${
           darkMode
             ? "from-dark-secondary to-dark-accent text-dark-text"

@@ -6,10 +6,10 @@ import Drawer from "@/components/navigation/Drawer";
 
 const AppLayout = () => {
   return (
-    <div className="flex overflow-x-auto duration-500 ease-in-out w-full h-screen">
+    <div className="flex-1 flex overflow-x-auto duration-500 ease-in-out w-full h-full">
       <Sidebar />
       <ThemeProvider>
-        <section className="flex-1 overflow-auto">
+        <section className="min-h-screen">
           <Drawer />
           <Outlet />
         </section>
