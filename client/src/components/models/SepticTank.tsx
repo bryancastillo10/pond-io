@@ -1,4 +1,5 @@
 import TextHeader from "@/components/static/TextHeader";
+import Diagram from "@/features/septic_tank/components/Diagram";
 
 const SepticTankSimulation = () => {
   return (
@@ -13,6 +14,8 @@ const SepticTankSimulation = () => {
           field.
         </p>
       </div>
+
+      <Diagram />
     </section>
   );
 };
