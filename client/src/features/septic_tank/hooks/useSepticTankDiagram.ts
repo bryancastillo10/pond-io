@@ -27,9 +27,7 @@ const useSepticTankDiagram = () => {
     const width = canvas.width;
     const height = canvas.height;
     const lineColor = getTankLineColor(isDarkMode);
-    const waterFillColor = isDarkMode
-      ? "rgba(50, 150, 200, 0.4)"
-      : "rgba(100, 200, 255, 0.4)";
+    const waterFillColor = isDarkMode ? "#3296C880" : "#0b7ada";
 
     ctx.clearRect(0, 0, width, height);
     ctx.lineWidth = 3;

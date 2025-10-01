@@ -1,5 +1,7 @@
 import TextHeader from "@/components/static/TextHeader";
 
+import Diagram from "@/features/uasb/components/Diagram";
+
 const UasbSimulation = () => {
   return (
     <section className="w-full h-full flex flex-col gap-2">
@@ -16,6 +18,8 @@ const UasbSimulation = () => {
           a sustainable treatment option.
         </p>
       </div>
+
+      <Diagram />
     </section>
   );
 };
