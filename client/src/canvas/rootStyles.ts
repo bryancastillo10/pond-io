@@ -9,7 +9,7 @@ function getTextColor(isDarkMode: boolean) {
     : styles.getPropertyValue("--color-text").trim();
 }
 
-const labelFont = `18px ${bodyFont}`;
-const pipeLabelFont = `18px ${bodyFont}`;
+const labelFont = `20px ${bodyFont}`;
+const pipeLabelFont = `20px ${bodyFont}`;
 
 export { getTextColor, labelFont, pipeLabelFont };
