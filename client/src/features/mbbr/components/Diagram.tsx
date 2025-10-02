@@ -1,8 +1,9 @@
 import useMBBRDiagram from "@/features/mbbr/hooks/useMBBRDiagram";
 import Button from "@/components/ui/Button";
-import { Pencil, Play } from "lucide-react";
+import { Pencil } from "lucide-react";
 
 import useDrawer from "@/lib/drawer-ui/useDrawer";
+import StartSimulationButton from "@/components/ui/StartSimulationButton";
 
 const Diagram = () => {
   const { handleOpenDrawer } = useDrawer();
@@ -41,13 +42,7 @@ const Diagram = () => {
         <p>mg/ L</p>
       </div>
 
-      <div className="absolute right-5 top-4">
-        <Button variant="primary">
-          <div className="flex items-center gap-2">
-            <Play /> Start
-          </div>
-        </Button>
-      </div>
+      <StartSimulationButton handleStart={() => {}} />
     </div>
   );
 };
