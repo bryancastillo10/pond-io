@@ -69,10 +69,9 @@ const NumberInput = ({
   };
 
   return (
-    <div className="w-full">
-      <label className="block text-sm font-medium mb-1" htmlFor="">
-        {label}
-      </label>
+    <div className="w-full py-1">
+      <label className="block text-sm font-medium mb-1">{label}</label>
+
       <div className="relative w-fit">
         <input
           type="text"
@@ -82,10 +81,10 @@ const NumberInput = ({
           onBlur={handleBlur}
           disabled={disabled}
           className={`px-3 py-2 border rounded-lg focus:outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary
-			min-w-sm
-			${disabled ? "bg-gray-100 cursor-not-allowed" : "bg-background"}
-            ${unit ? "pr-16" : "pr-3"}  
-			`}
+        min-w-sm
+        ${disabled ? "bg-gray-100 cursor-not-allowed" : "bg-background"}
+        ${unit ? "pr-16" : "pr-3"}  
+      `}
         />
         {unit && (
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -93,15 +92,14 @@ const NumberInput = ({
           </div>
         )}
       </div>
-      {(error || helperText) && (
-        <p
-          className={`mt-1 text-sm ${
-            error ? "text-rose-500" : "text-gray-500"
-          }`}
-        >
-          {error || helperText}
-        </p>
-      )}
+
+      <p
+        className={`mt-1 text-sm min-h-[1.25rem] ${
+          error ? "text-rose-500" : "text-gray-500"
+        }`}
+      >
+        {error || helperText || "\u00A0"}
+      </p>
     </div>
   );
 };

@@ -30,6 +30,8 @@ const UasbSimulation = () => {
         value={loadingRate}
         unit="m³/day"
         onChange={setLoadingRate}
+        decimals={0}
+        max={500}
         disabled={false}
       />
 
