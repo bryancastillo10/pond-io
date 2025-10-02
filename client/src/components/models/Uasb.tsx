@@ -2,7 +2,13 @@ import TextHeader from "@/components/static/TextHeader";
 
 import Diagram from "@/features/uasb/components/Diagram";
 
+import NumberInput from "../ui/NumberInput";
+import { useState } from "react";
+
 const UasbSimulation = () => {
+  const [loadingRate, setLoadingRate] = useState("");
+  const [tkn, setTkn] = useState("45.30");
+
   return (
     <section className="w-full h-full flex flex-col gap-2">
       <TextHeader
@@ -18,6 +24,22 @@ const UasbSimulation = () => {
           a sustainable treatment option.
         </p>
       </div>
+
+      <NumberInput
+        label="Loading Rate"
+        value={loadingRate}
+        unit="m³/day"
+        onChange={setLoadingRate}
+        disabled={false}
+      />
+
+      <NumberInput
+        label="Total Kjeldahl Nitrogen (TKN)"
+        value={tkn}
+        unit="mg/L"
+        onChange={setTkn}
+        disabled={false}
+      />
 
       <Diagram />
     </section>
