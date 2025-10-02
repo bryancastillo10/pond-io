@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CircleX, Info } from "lucide-react";
 
 interface NumberInputProps {
   label: string;
@@ -87,17 +88,29 @@ const NumberInput = ({
         />
         {unit && (
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-            <span className="text-gray-500 text-sm font-medium">{unit}</span>
+            <span className="text-accent text-sm font-medium">{unit}</span>
           </div>
         )}
       </div>
 
       <p
-        className={`mt-1 text-sm min-h-[1.25rem] ${
-          error ? "text-rose-500" : "text-gray-500"
+        className={`mt-1 text-sm flex items-center gap-1 min-h-[1.25rem] ${
+          error ? "text-rose-500" : "text-secondary"
         }`}
       >
-        {error || helperText || "\u00A0"}
+        {error ? (
+          <>
+            <CircleX size={14} className="shrink-0" />
+            {error}
+          </>
+        ) : helperText ? (
+          <>
+            <Info size={14} className="shrink-0" />
+            {helperText}
+          </>
+        ) : (
+          "\u00A0"
+        )}
       </p>
     </div>
   );
