@@ -1,6 +1,9 @@
 package infrastructure
 
 import (
+	"pond-io-server/infrastructure/routes"
+	"pond-io-server/middleware"
+
 	"log"
 	"os"
 
@@ -25,10 +28,10 @@ func RunGin(corsConfig cors.Config) {
 		}
 	}
 
-	// ToDo:
-	// r.Use(middleware.ErrorHandler())
+	r.Use(middleware.ErrorHandler())
 
 	// routes.RegisterRoutes(r, DB, RedisClient)
+	routes.RegisterRoutes(r)
 
 	err := r.Run("0.0.0.0:" + port)
 	if err != nil {
