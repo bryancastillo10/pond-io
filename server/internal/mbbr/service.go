@@ -4,6 +4,7 @@ import (
 	"math"
 
 	appErr "pond-io-server/pkg/errors"
+	"pond-io-server/pkg/mathfmt"
 )
 
 type Service struct {
@@ -90,11 +91,11 @@ func calculateStageDesign(massRemoved_g_d float64, specs MBBRSpecifications) Des
 	tankLength := specs.LengthWidthRatio * tankWidth
 
 	return DesignResult{
-		LoadingRate:      massRemoved_g_d,
-		MediaSurfaceArea: mediaSurfaceArea,
-		MediaVolume:      mediaVolume,
-		TankVolume:       tankVolume,
-		Width:            tankWidth,
-		Length:           tankLength,
+		LoadingRate:      mathfmt.RoundToTwoDecimals(massRemoved_g_d),
+		MediaSurfaceArea: mathfmt.RoundToTwoDecimals(mediaSurfaceArea),
+		MediaVolume:      mathfmt.RoundToTwoDecimals(mediaVolume),
+		TankVolume:       mathfmt.RoundToTwoDecimals(tankVolume),
+		Width:            mathfmt.RoundToTwoDecimals(tankWidth),
+		Length:           mathfmt.RoundToTwoDecimals(tankLength),
 	}
 }
