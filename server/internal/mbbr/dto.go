@@ -19,6 +19,7 @@ type MBBRSpecifications struct  {
 }
 
 type SimulateMbbrResponse struct {
+	EffluentConc EffluentConc
 	FirstStage DesignResult	`json:"bodRemovalTank"`
 	SecondStage DesignResult	`json:"nitrificationTank"`
 }
@@ -31,4 +32,9 @@ type DesignResult struct {
 	TankVolume float64 `json:"tankVolume"`  // m3
 	Width float64`json:"width"`   // m
 	Length float64 `json:"length"` //m
+}
+
+type EffluentConc struct {
+	EffluentBOD float64 `json:"effluentBOD"`
+	EffluentTKN float64 `json:"effluentTKN"`
 }

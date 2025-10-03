@@ -25,5 +25,12 @@ func (h *Handler) SimulateMBBR(c *gin.Context) {
 
 	println(req)
 
-	c.JSON(200, gin.H{"message":"Simulation is successful"})
+	response, err := h.service.SimulateMBBR(*req)
+
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(200, gin.H{"message":"Simulation is successful", "result": response})
 }
