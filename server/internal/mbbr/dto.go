@@ -6,8 +6,8 @@ type SimulateMbbrRequest struct {
 	InfTKN float64 `json:"infTKN"`    // mg N/L
 	TargetEffPercBOD float64 `json:"targetEffPercBOD"`  // %
 	TargetEffPercTKN float64	`json:"targetEffPercTKN"`  // %
-	FirstStage MBBRSpecifications  
-	SecondStage MBBRSpecifications
+	FirstStage MBBRSpecifications  `json:"firstStage"`
+	SecondStage MBBRSpecifications	`json:"secondStage"`
 }
 
 type MBBRSpecifications struct  {
@@ -19,8 +19,8 @@ type MBBRSpecifications struct  {
 }
 
 type SimulateMbbrResponse struct {
-	FirstStage DesignResult
-	SecondStage DesignResult
+	FirstStage DesignResult	`json:"bodRemovalTank"`
+	SecondStage DesignResult	`json:"nitrificationTank"`
 }
 
 
