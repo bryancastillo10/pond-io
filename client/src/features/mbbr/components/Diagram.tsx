@@ -25,7 +25,7 @@ const Diagram = () => {
   const { mbbrRef } = useMBBRDiagram();
 
   const openFirstStageForm = () => {
-    handleOpenDrawer("BOD Removal Unit", "FirstStageForm");
+    handleOpenDrawer("BOD Removal Unit", "MBBRFirstStageForm");
   };
 
   return (
