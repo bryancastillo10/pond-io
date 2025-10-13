@@ -1,4 +1,4 @@
-const FirstStageForm = () => {
+const MBBRFirstStageForm = () => {
   return (
     <div className="">
       <h1>MBBR First Stage Unit</h1>
@@ -8,4 +8,4 @@ const FirstStageForm = () => {
   );
 };
 
-export default FirstStageForm;
+export default MBBRFirstStageForm;
