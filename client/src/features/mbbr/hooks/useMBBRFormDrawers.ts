@@ -1,38 +1,22 @@
-import useMBBRForm from "@/features/mbbr/hooks/useMBBRForm";
 import useDrawer from "@/lib/drawer-ui/useDrawer";
 
 const useMBBRFormDrawers = () => {
   const { handleOpenDrawer } = useDrawer();
 
-  const { infData, effData, firstStageData, secondStageData, handleChange } =
-    useMBBRForm();
-
   const openInlfuentForm = () => {
-    handleOpenDrawer("MBBR Influent", "MBBRInfluentForm", {
-      infData,
-      handleChange,
-    });
+    handleOpenDrawer("MBBR Influent", "MBBRInfluentForm");
   };
 
   const openFirstStageForm = () => {
-    handleOpenDrawer("MBBR BOD Removal Unit", "MBBRFirstStageForm", {
-      firstStageData,
-      handleChange,
-    });
+    handleOpenDrawer("MBBR BOD Removal Unit", "MBBRFirstStageForm");
   };
 
   const openSecondStageForm = () => {
-    handleOpenDrawer("MBBR Nitrification Unit", "MBBRSecondStageForm", {
-      secondStageData,
-      handleChange,
-    });
+    handleOpenDrawer("MBBR Nitrification Unit", "MBBRSecondStageForm");
   };
 
   const openEffluentForm = () => {
-    handleOpenDrawer("MBBR Effluent", "MBBREffluentForm", {
-      effData,
-      handleChange,
-    });
+    handleOpenDrawer("MBBR Effluent", "MBBREffluentForm");
   };
 
   return {
