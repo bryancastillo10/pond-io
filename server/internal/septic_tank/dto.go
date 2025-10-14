@@ -15,7 +15,7 @@ type SludgeVolumeSpecifications struct {
 }
 
 type SimulateSepticTankResponse struct {
-	CalculatedInfo CalculatedInformation
+	CalculatedInfo CalculatedInformation	`json:"calculatedInfo"`
 	Dimensions DesignResult `json:"dimensions"`
 }
 
