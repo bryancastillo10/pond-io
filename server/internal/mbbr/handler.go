@@ -23,8 +23,6 @@ func (h *Handler) SimulateMBBR(c *gin.Context) {
 		return
 	}
 
-	println(req)
-
 	response, err := h.service.SimulateMBBR(*req)
 
 	if err != nil {

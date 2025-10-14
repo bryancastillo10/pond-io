@@ -2,7 +2,7 @@ package septictank
 
 type SimulateSepticTankRequest struct {
 	NumberOfUsers int64 `json:"numberOfUsers"` //persons
-	WaterConsumption int64 `json:"waterConsumption"` // L
+	WaterConsumption int64 `json:"waterConsumption"` // L/person
 	WaterDepth	float64 `json:"waterDepth"` //m
 	AllowanceDepth float64 `json:"allowanceDepth"` //m
 	SludgeVolume SludgeVolumeSpecifications	`json:"sludgeVolume"`
