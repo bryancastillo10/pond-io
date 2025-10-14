@@ -24,7 +24,7 @@ func (s *Service) SimulateMBBR(req SimulateMbbrRequest) (*SimulateMbbrResponse, 
 
 	// Basic Validation
 	if flowRate <= 0 {
-		return nil, appErr.NewBadRequest("Invalid User ID", nil)
+		return nil, appErr.NewBadRequest("Invalid Flow Rate", nil)
 	}
 
 	// --- STAGE 1: BOD Removal ---
