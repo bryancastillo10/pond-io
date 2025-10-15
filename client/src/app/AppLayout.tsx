@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from "@/components/navigation/Sidebar";
 import ThemeProvider from "@/app/ThemeProvider";
+import FormProvider from "@/app/FormProvider";
 import Drawer from "@/components/navigation/Drawer";
 
 const AppLayout = () => {
@@ -10,7 +11,9 @@ const AppLayout = () => {
       <Sidebar />
       <ThemeProvider>
         <section className="min-h-screen">
-          <Drawer />
+          <FormProvider>
+            <Drawer />
+          </FormProvider>
           <Outlet />
         </section>
       </ThemeProvider>

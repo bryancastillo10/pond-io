@@ -81,7 +81,7 @@ const NumberInput = ({
           onChange={handleChange}
           onBlur={handleBlur}
           disabled={disabled}
-          className={`px-3 py-2 border rounded-lg focus:outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary
+          className={`px-3 py-2 border rounded-lg focus:outline-none transition-all focus:border-primary focus:ring-1 focus:ring-primary text-text
         ${disabled ? "bg-gray-100 cursor-not-allowed" : "bg-background"}
         ${unit ? "pr-16" : "pr-3"}  
       `}
