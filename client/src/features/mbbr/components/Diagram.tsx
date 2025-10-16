@@ -28,17 +28,20 @@ const Diagram = () => {
       <EditFormButton
         openDrawer={openFirstStageForm}
         position="top-20 left-100"
+        isFormCompleted={formCompletion.firstStageData}
       />
 
       <EditFormButton
         openDrawer={openSecondStageForm}
         position="top-20 right-120"
+        isFormCompleted={formCompletion.secondStageData}
       />
       <canvas ref={mbbrRef} width={1000} height={450} />
 
       <EditFormButton
         openDrawer={openEffluentForm}
         position="bottom-60 right-40"
+        isFormCompleted={formCompletion.effData}
       />
       <StartSimulationButton handleStart={() => {}} />
     </div>

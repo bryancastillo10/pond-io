@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 
 import Sidebar from "@/components/navigation/Sidebar";
 import ThemeProvider from "@/app/ThemeProvider";
@@ -11,6 +12,7 @@ const AppLayout = () => {
       <Sidebar />
       <ThemeProvider>
         <section className="min-h-screen">
+          <Toaster richColors position="top-right" />
           <FormProvider>
             <Drawer />
             <Outlet />

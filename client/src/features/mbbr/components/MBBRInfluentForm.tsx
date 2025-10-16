@@ -1,37 +1,59 @@
 import { useMBBRFormContext } from "@/features/mbbr/context/MBBRFormContext";
+import useDrawer from "@/lib/drawer-ui/useDrawer";
+
 import NumberInput from "@/components/ui/NumberInput";
+import Button from "@/components/ui/Button";
+import { toast } from "sonner";
 
 const MBBRInfluentForm = () => {
-  const { infData, handleChange } = useMBBRFormContext();
+  const { handleCloseDrawer } = useDrawer();
+
+  const { infData, formCompletion, handleChange } = useMBBRFormContext();
+
+  const handleSave = (group: keyof typeof formCompletion) => {
+    if (formCompletion[group]) {
+      handleCloseDrawer();
+    } else {
+      toast.success("Please fill up the form");
+    }
+  };
 
   return (
-    <div className="">
-      <form>
-        <NumberInput
-          label="Flow Rate"
-          value={infData.flowRate}
-          onChange={handleChange("infData", "flowRate")}
-          disabled={false}
-          unit="m³/d"
-        />
+    <form className="grid grid-cols-1">
+      <NumberInput
+        label="Flow Rate"
+        value={infData.flowRate}
+        onChange={handleChange("infData", "flowRate")}
+        decimals={0}
+        disabled={false}
+        unit="m³/d"
+      />
 
-        <NumberInput
-          label="Influent BOD"
-          value={infData.infBOD}
-          onChange={handleChange("infData", "infBOD")}
-          disabled={false}
-          unit="mg/L"
-        />
+      <NumberInput
+        label="Influent BOD"
+        value={infData.infBOD}
+        onChange={handleChange("infData", "infBOD")}
+        disabled={false}
+        unit="mg/L"
+      />
 
-        <NumberInput
-          label="Influent Total Kjeldahl Nitrogen"
-          value={infData.infTKN}
-          onChange={handleChange("infData", "infTKN")}
-          disabled={false}
-          unit="mg-N/L"
-        />
-      </form>
-    </div>
+      <NumberInput
+        label="Influent Total Kjeldahl Nitrogen"
+        value={infData.infTKN}
+        onChange={handleChange("infData", "infTKN")}
+        disabled={false}
+        unit="mg-N/L"
+      />
+
+      <div className="flex justify-between gap-4 w-fit">
+        <Button action={handleCloseDrawer} variant="outline">
+          Cancel
+        </Button>
+        <Button action={() => handleSave("infData")} variant="primary">
+          Save
+        </Button>
+      </div>
+    </form>
   );
 };
 
