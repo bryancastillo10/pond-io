@@ -13,8 +13,8 @@ const AppLayout = () => {
         <section className="min-h-screen">
           <FormProvider>
             <Drawer />
+            <Outlet />
           </FormProvider>
-          <Outlet />
         </section>
       </ThemeProvider>
     </div>
