@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 const initialInfData = {
   flowRate: "",
@@ -36,6 +36,12 @@ interface MBBRFormContextType {
     group: T,
     field: K
   ) => (value: string) => void;
+  formCompletion: {
+    infData: boolean;
+    firstStageData: boolean;
+    secondStageData: boolean;
+    effData: boolean;
+  };
 }
 
 const MBBRFormContext = createContext<MBBRFormContextType | null>(null);
@@ -76,6 +82,19 @@ export const MBBRFormContextProvider = ({
       setters[group]((prev: any) => ({ ...prev, [field]: value }));
     };
 
+  const isCompleted = (data: Record<string, string>) =>
+    Object.values(data).every((val) => val.trim() !== "");
+
+  const formCompletion = useMemo(
+    () => ({
+      infData: isCompleted(infData),
+      firstStageData: isCompleted(firstStageData),
+      secondStageData: isCompleted(secondStageData),
+      effData: isCompleted(effData),
+    }),
+    [infData, firstStageData, secondStageData, effData]
+  );
+
   const contextValues: MBBRFormContextType = {
     infData,
     effData,
@@ -83,6 +102,7 @@ export const MBBRFormContextProvider = ({
     secondStageData,
     mbbrInput,
     handleChange,
+    formCompletion,
   };
 
   return (

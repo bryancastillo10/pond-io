@@ -1,6 +1,8 @@
 import Button from "@/components/ui/Button";
 import { Pencil, CircleAlert, CircleCheck } from "lucide-react";
 
+import { useAppSelector } from "@/lib/redux/hooks";
+
 interface EditFormButtonProps {
   title?: string;
   position: string;
@@ -14,6 +16,8 @@ const EditFormButton = ({
   isFormCompleted,
   position,
 }: EditFormButtonProps) => {
+  const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
+
   return (
     <div className={`absolute ${position}`}>
       {title && <p className="my-0.5 text-sm">{title}</p>}
@@ -22,9 +26,9 @@ const EditFormButton = ({
           <Pencil size={18} />
         </Button>
         {isFormCompleted ? (
-          <CircleCheck color="#0b7ada" size={14} />
+          <CircleCheck color={isDarkMode ? "#aaf0d1" : "#004a00"} size={14} />
         ) : (
-          <CircleAlert color="#0b7ada" size={14} />
+          <CircleAlert color={isDarkMode ? "#ffff49" : "#d3d300"} size={14} />
         )}
       </div>
     </div>
