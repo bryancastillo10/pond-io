@@ -36,7 +36,7 @@ const MBBRInfluentForm = () => {
       />
 
       <div className="flex justify-between gap-4 w-fit">
-        <Button action={handleCloseDrawer} variant="outline">
+        <Button action={handleCloseDrawer} variant="danger">
           Cancel
         </Button>
         <Button
