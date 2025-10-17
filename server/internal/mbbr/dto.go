@@ -19,7 +19,7 @@ type MBBRSpecifications struct  {
 }
 
 type SimulateMbbrResponse struct {
-	EffluentConc EffluentConc
+	EffluentConc EffluentConc`json:"effluentConc"`
 	FirstStage DesignResult	`json:"bodRemovalTank"`
 	SecondStage DesignResult	`json:"nitrificationTank"`
 }

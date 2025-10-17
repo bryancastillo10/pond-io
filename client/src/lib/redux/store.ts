@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "@/lib/redux/reducer";
+import rootReducer, { apis, apiReducerPaths } from "@/lib/redux/reducer";
 
 import {
   persistReducer,
@@ -38,7 +38,7 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  // blacklist: apiReducerPaths,
+  blacklist: apiReducerPaths,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -52,8 +52,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         ignoredPaths: ["api"],
       },
-    }),
-  // .concat(apis.map(api => api.middleware)),
+    }).concat(apis.map((api) => api.middleware)),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

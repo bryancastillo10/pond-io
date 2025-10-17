@@ -3,20 +3,10 @@ import useDrawer from "@/lib/drawer-ui/useDrawer";
 
 import NumberInput from "@/components/ui/NumberInput";
 import Button from "@/components/ui/Button";
-import { toast } from "sonner";
 
 const MBBRInfluentForm = () => {
   const { handleCloseDrawer } = useDrawer();
-
-  const { infData, formCompletion, handleChange } = useMBBRFormContext();
-
-  const handleSave = (group: keyof typeof formCompletion) => {
-    if (formCompletion[group]) {
-      handleCloseDrawer();
-    } else {
-      toast.success("Please fill up the form");
-    }
-  };
+  const { infData, handleSave, handleChange } = useMBBRFormContext();
 
   return (
     <form className="grid grid-cols-1">
@@ -46,10 +36,13 @@ const MBBRInfluentForm = () => {
       />
 
       <div className="flex justify-between gap-4 w-fit">
-        <Button action={handleCloseDrawer} variant="outline">
+        <Button action={handleCloseDrawer} variant="danger">
           Cancel
         </Button>
-        <Button action={() => handleSave("infData")} variant="primary">
+        <Button
+          action={() => handleSave("infData", handleCloseDrawer)}
+          variant="primary"
+        >
           Save
         </Button>
       </div>

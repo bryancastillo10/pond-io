@@ -12,7 +12,7 @@ const AppLayout = () => {
       <Sidebar />
       <ThemeProvider>
         <section className="min-h-screen">
-          <Toaster richColors position="top-right" />
+          <Toaster richColors position="bottom-right" />
           <FormProvider>
             <Drawer />
             <Outlet />
