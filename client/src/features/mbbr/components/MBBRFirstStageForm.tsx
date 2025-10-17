@@ -3,20 +3,11 @@ import useDrawer from "@/lib/drawer-ui/useDrawer";
 
 import NumberInput from "@/components/ui/NumberInput";
 import Button from "@/components/ui/Button";
-import { toast } from "sonner";
 
 const MBBRFirstStageForm = () => {
   const { handleCloseDrawer } = useDrawer();
 
-  const { firstStageData, formCompletion, handleChange } = useMBBRFormContext();
-
-  const handleSave = (group: keyof typeof formCompletion) => {
-    if (formCompletion[group]) {
-      handleCloseDrawer();
-    } else {
-      toast.success("Please fill up the form");
-    }
-  };
+  const { firstStageData, handleSave, handleChange } = useMBBRFormContext();
 
   return (
     <form className="grid grid-cols-1">
@@ -69,7 +60,10 @@ const MBBRFirstStageForm = () => {
         <Button action={handleCloseDrawer} variant="outline">
           Cancel
         </Button>
-        <Button action={() => handleSave("infData")} variant="primary">
+        <Button
+          action={() => handleSave("firstStageData", handleCloseDrawer)}
+          variant="primary"
+        >
           Save
         </Button>
       </div>

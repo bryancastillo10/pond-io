@@ -1,5 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react";
 
+import { toast } from "sonner";
+
 const initialInfData = {
   flowRate: "",
   infBOD: "",
@@ -23,12 +25,20 @@ type InfData = typeof initialInfData;
 type EffData = typeof initialEffPercData;
 type StageData = typeof mbbrStageData;
 
+type FormCompletion<T> = {
+  infData: T;
+  firstStageData: T;
+  secondStageData: T;
+  effData: T;
+};
+
 interface MBBRFormContextType {
   infData: InfData;
   effData: EffData;
   firstStageData: StageData;
   secondStageData: StageData;
   mbbrInput: Record<string, any>;
+  formCompletion: FormCompletion<boolean>;
   handleChange: <
     T extends "infData" | "effData" | "firstStageData" | "secondStageData",
     K extends keyof (InfData & EffData & StageData)
@@ -36,12 +46,10 @@ interface MBBRFormContextType {
     group: T,
     field: K
   ) => (value: string) => void;
-  formCompletion: {
-    infData: boolean;
-    firstStageData: boolean;
-    secondStageData: boolean;
-    effData: boolean;
-  };
+  handleSave: (
+    group: keyof FormCompletion<boolean>,
+    handleCloseDrawer: () => void
+  ) => void;
 }
 
 const MBBRFormContext = createContext<MBBRFormContextType | null>(null);
@@ -95,14 +103,26 @@ export const MBBRFormContextProvider = ({
     [infData, firstStageData, secondStageData, effData]
   );
 
+  const handleSave = (
+    group: keyof typeof formCompletion,
+    handleCloseDrawer: () => void
+  ) => {
+    if (formCompletion[group]) {
+      handleCloseDrawer();
+    } else {
+      toast.warning("Please fill up the form");
+    }
+  };
+
   const contextValues: MBBRFormContextType = {
     infData,
     effData,
     firstStageData,
     secondStageData,
     mbbrInput,
-    handleChange,
     formCompletion,
+    handleChange,
+    handleSave,
   };
 
   return (
