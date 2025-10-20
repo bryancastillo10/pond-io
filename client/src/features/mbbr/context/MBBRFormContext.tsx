@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { useSimulateMbbrMutation } from "@/features/mbbr/api/simulate";
 
 import { toast } from "sonner";
 
@@ -50,6 +51,9 @@ interface MBBRFormContextType {
     group: keyof FormCompletion<boolean>,
     handleCloseDrawer: () => void
   ) => void;
+  handleSimulate: () => Promise<void>;
+  isError: boolean;
+  isLoading: boolean;
 }
 
 const MBBRFormContext = createContext<MBBRFormContextType | null>(null);
@@ -64,6 +68,9 @@ export const MBBRFormContextProvider = ({
   const [firstStageData, setFirstStageData] = useState(mbbrStageData);
   const [secondStageData, setSecondStageData] = useState(mbbrStageData);
 
+  const [simulateMbbr, { data, isLoading, isError }] =
+    useSimulateMbbrMutation();
+
   const setters = {
     infData: setInfData,
     effData: setEffData,
@@ -71,12 +78,30 @@ export const MBBRFormContextProvider = ({
     secondStageData: setSecondStageData,
   };
 
-  const mbbrInput = {
-    ...infData,
-    ...effData,
-    firstStage: { ...firstStageData },
-    secondStage: { ...secondStageData },
-  };
+  const mbbrInput = useMemo(
+    () => ({
+      flowRate: Number(infData.flowRate),
+      infBOD: Number(infData.infBOD),
+      infTKN: Number(infData.infTKN),
+      targetEffPercBOD: Number(effData.effPercBODRemoval),
+      targetEffPercTKN: Number(effData.effPercTKNRemoval),
+      firstStage: {
+        salr: Number(firstStageData.salr),
+        carrierFill: Number(firstStageData.carrierFill),
+        waterLevel: Number(firstStageData.waterLevel),
+        carrierSurfaceArea: Number(firstStageData.carrierSurfaceArea),
+        lengthWidthRatio: Number(firstStageData.lengthWidthRatio),
+      },
+      secondStage: {
+        salr: Number(secondStageData.salr),
+        carrierFill: Number(secondStageData.carrierFill),
+        waterLevel: Number(secondStageData.waterLevel),
+        carrierSurfaceArea: Number(secondStageData.carrierSurfaceArea),
+        lengthWidthRatio: Number(secondStageData.lengthWidthRatio),
+      },
+    }),
+    [infData, effData, firstStageData, secondStageData]
+  );
 
   const handleChange =
     <
@@ -114,6 +139,17 @@ export const MBBRFormContextProvider = ({
     }
   };
 
+  const handleSimulate = async () => {
+    try {
+      const result = await simulateMbbr(mbbrInput).unwrap();
+      console.log("Simulation result:", result);
+    } catch (error) {
+      toast.error("Simulation failed");
+    }
+  };
+
+  console.log("Response data", data);
+
   const contextValues: MBBRFormContextType = {
     infData,
     effData,
@@ -121,8 +157,11 @@ export const MBBRFormContextProvider = ({
     secondStageData,
     mbbrInput,
     formCompletion,
+    isLoading,
+    isError,
     handleChange,
     handleSave,
+    handleSimulate,
   };
 
   return (

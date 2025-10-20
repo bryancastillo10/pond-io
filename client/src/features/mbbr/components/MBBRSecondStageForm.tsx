@@ -32,7 +32,7 @@ const MBBRSecondStageForm = () => {
       <NumberInput
         label="Liquid Depth"
         value={secondStageData.waterLevel}
-        onChange={handleChange("firstStageData", "waterLevel")}
+        onChange={handleChange("secondStageData", "waterLevel")}
         decimals={2}
         disabled={false}
         unit="m"
@@ -41,10 +41,19 @@ const MBBRSecondStageForm = () => {
       <NumberInput
         label="Carrier Surface Area"
         value={secondStageData.carrierSurfaceArea}
-        onChange={handleChange("firstStageData", "carrierSurfaceArea")}
+        onChange={handleChange("secondStageData", "carrierSurfaceArea")}
         decimals={2}
         disabled={false}
         unit="m²/m³"
+      />
+
+      <NumberInput
+        label="Length Width Ratio"
+        value={secondStageData.lengthWidthRatio}
+        onChange={handleChange("secondStageData", "lengthWidthRatio")}
+        decimals={2}
+        disabled={false}
+        unit=""
       />
 
       <div className="flex justify-between gap-4 w-fit">

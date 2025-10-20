@@ -15,7 +15,7 @@ const Diagram = () => {
     openEffluentForm,
   } = useMBBRFormDrawers();
 
-  const { formCompletion } = useMBBRFormContext();
+  const { formCompletion, handleSimulate } = useMBBRFormContext();
 
   return (
     <div className="relative rounded-lg border shadow-md my-2 w-full h-[75vh] mx-auto flex justify-center items-center">
@@ -43,7 +43,7 @@ const Diagram = () => {
         position="bottom-60 right-40"
         isFormCompleted={formCompletion.effData}
       />
-      <StartSimulationButton handleStart={() => {}} />
+      <StartSimulationButton handleStart={handleSimulate} />
     </div>
   );
 };

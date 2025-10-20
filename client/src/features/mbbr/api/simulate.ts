@@ -8,7 +8,7 @@ import type {
 export const mbbrApi = createApi({
   reducerPath: "mbbrApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_BASE_SIMULATE_URL + "simulate",
+    baseUrl: import.meta.env.VITE_API_BASE_URL + "simulate",
   }),
   endpoints: (build) => ({
     simulateMbbr: build.mutation<SimulateMbbrResponse, SimulateMBBRRequest>({
