@@ -3,5 +3,13 @@ import Home from "./Home";
 import ModelSimulation from "./ModelSimulation";
 import About from "./About";
 import Documentation from "./Documentation";
+import SimulationResult from "./SimulationResult";
 
-export { Welcome, Home, ModelSimulation, About, Documentation };
+export {
+  Welcome,
+  Home,
+  ModelSimulation,
+  About,
+  Documentation,
+  SimulationResult,
+};

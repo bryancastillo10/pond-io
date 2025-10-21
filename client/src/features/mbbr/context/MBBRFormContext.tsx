@@ -1,4 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+
 import { useSimulateMbbrMutation } from "@/features/mbbr/api/simulate";
 
 import { toast } from "sonner";
@@ -68,8 +71,10 @@ export const MBBRFormContextProvider = ({
   const [firstStageData, setFirstStageData] = useState(mbbrStageData);
   const [secondStageData, setSecondStageData] = useState(mbbrStageData);
 
-  const [simulateMbbr, { data, isLoading, isError }] =
-    useSimulateMbbrMutation();
+  const [simulateMbbr, { isLoading, isError }] = useSimulateMbbrMutation();
+
+  const navigate = useNavigate();
+  const { name } = useParams();
 
   const setters = {
     infData: setInfData,
@@ -142,13 +147,23 @@ export const MBBRFormContextProvider = ({
   const handleSimulate = async () => {
     try {
       const result = await simulateMbbr(mbbrInput).unwrap();
-      console.log("Simulation result:", result);
+
+      const resId = uuidv4();
+
+      navigate(`/model/${name}/result/${resId}`, {
+        state: {
+          model: name,
+          id: resId,
+          input: mbbrInput,
+          output: result,
+        },
+      });
+
+      toast.success("Simulation is successful");
     } catch (error) {
-      toast.error("Simulation failed");
+      toast.error(`Failed to simulate ${name}`);
     }
   };
-
-  console.log("Response data", data);
 
   const contextValues: MBBRFormContextType = {
     infData,
