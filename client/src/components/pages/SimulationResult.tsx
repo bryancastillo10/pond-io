@@ -1,12 +1,13 @@
 import { useLocation, useParams } from "react-router-dom";
 import TextHeader from "@/components/static/TextHeader";
+import NoSimulationFound from "@/app/NoSimulationFound";
 
 const SimulationResult = () => {
   const { name, id } = useParams();
   const { state } = useLocation();
 
   if (!state) {
-    return <p>No simulation result found.</p>;
+    return <NoSimulationFound />;
   }
 
   const { input, output } = state;
