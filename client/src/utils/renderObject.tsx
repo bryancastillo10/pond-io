@@ -1,11 +1,14 @@
 import { useAppSelector } from "@/lib/redux/hooks";
 
+import { mbbrKeyLabels } from "@/features/mbbr/constants/parameterKeys";
+
 export const renderObject = (obj: Record<string, any>, level = 0) => {
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   return (
     <div className={`${level > 0 ? "ml-4 pl-4 " : ""} `}>
       {Object.entries(obj).map(([key, value]) => {
+        const label = mbbrKeyLabels[key] || key;
         const isObject =
           value &&
           typeof value === "object" &&
@@ -22,7 +25,7 @@ export const renderObject = (obj: Record<string, any>, level = 0) => {
             }`}
           >
             <div className="flex justify-between items-start">
-              <span className="font-medium capitalize">{key}</span>
+              <span className="font-medium">{label}</span>
               {!isObject && !isArray && (
                 <span className="ml-4 text-right">
                   {String(Number(value).toFixed(2))}

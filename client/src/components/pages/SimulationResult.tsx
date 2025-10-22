@@ -1,14 +1,17 @@
-import { useLocation, useParams } from "react-router-dom";
+import NoSimulationFound from "@/app/NoSimulationFound";
+
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/lib/redux/hooks";
 
 import TextHeader from "@/components/static/TextHeader";
+import Button from "@/components/ui/Button";
 import { renderObject } from "@/utils/renderObject";
-import NoSimulationFound from "@/app/NoSimulationFound";
 
 const SimulationResult = () => {
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   const { name } = useParams();
+  const navigate = useNavigate();
   const { state } = useLocation();
 
   if (!state) {
@@ -18,7 +21,7 @@ const SimulationResult = () => {
   const { input, output } = state;
 
   return (
-    <div className="p-6">
+    <section className="p-6">
       <div className="">
         <TextHeader
           text={`Simulation Result: ${
@@ -27,7 +30,7 @@ const SimulationResult = () => {
           withLine
         />
       </div>
-      <section className="grid grid-cols-2 gap-4">
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
           <h2 className="font-semibold mb-2">Input Parameters</h2>
           <div
@@ -52,7 +55,18 @@ const SimulationResult = () => {
           </div>
         </div>
       </section>
-    </div>
+      <div className="mt-10 flex w-full justify-center lg:mt-8 lg:justify-end items-center gap-4">
+        <Button
+          action={() => {
+            navigate(`/model/${name}`);
+          }}
+          variant="outline"
+        >
+          Go Back
+        </Button>
+        <Button variant="primary">Save</Button>
+      </div>
+    </section>
   );
 };
 
