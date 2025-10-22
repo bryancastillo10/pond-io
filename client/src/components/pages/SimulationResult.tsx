@@ -1,55 +1,72 @@
-import { useLocation, useParams } from "react-router-dom";
+import NoSimulationFound from "@/app/NoSimulationFound";
+
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useAppSelector } from "@/lib/redux/hooks";
+
 import TextHeader from "@/components/static/TextHeader";
+import Button from "@/components/ui/Button";
+import { renderObject } from "@/utils/renderObject";
 
 const SimulationResult = () => {
-  const { name, id } = useParams();
+  const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
+
+  const { name } = useParams();
+  const navigate = useNavigate();
   const { state } = useLocation();
 
   if (!state) {
-    return <p>No simulation result found.</p>;
+    return <NoSimulationFound />;
   }
 
   const { input, output } = state;
 
   return (
-    <div className="p-6 space-y-6">
-      <TextHeader text={`Simulation Result: ${name}`} withLine />
-      <p className="text-sm text-gray-500 mb-4">Result ID: {id}</p>
+    <section className="p-6">
+      <div className="">
+        <TextHeader
+          text={`Simulation Result: ${
+            name?.toUpperCase() || "Unknown Model Name"
+          }`}
+          withLine
+        />
+      </div>
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div>
+          <h2 className="font-semibold mb-2">Input Parameters</h2>
+          <div
+            className={`p-4 rounded-lg border border-text ${
+              isDarkMode ? "bg-accent" : "bg-gray-50"
+            }`}
+          >
+            {renderObject(input)}
+          </div>
+        </div>
 
-      <section>
-        <h2 className="font-semibold mb-2">Input Parameters</h2>
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-          {Object.entries(input).map(([key, value]) => (
-            <div
-              key={key}
-              className="flex justify-between py-1 border-b last:border-b-0"
-            >
-              <span className="font-medium capitalize text-gray-700">
-                {key}
-              </span>
-              <span className="text-gray-900">{String(value)}</span>
-            </div>
-          ))}
+        <div>
+          <h2 className="font-semibold mb-2">Output Results</h2>
+          <div
+            className={`p-4 rounded-lg border border-text ${
+              isDarkMode ? "bg-primary" : "bg-gray-50"
+            }`}
+          >
+            {output?.result
+              ? renderObject(output.result)
+              : renderObject(output)}
+          </div>
         </div>
       </section>
-
-      <section>
-        <h2 className="font-semibold mb-2">Output Results</h2>
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-          {Object.entries(output).map(([key, value]) => (
-            <div
-              key={key}
-              className="flex justify-between py-1 border-b last:border-b-0"
-            >
-              <span className="font-medium capitalize text-gray-700">
-                {key}
-              </span>
-              <span className="text-gray-900">{String(value)}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+      <div className="mt-10 flex w-full justify-center lg:mt-8 lg:justify-end items-center gap-4">
+        <Button
+          action={() => {
+            navigate(`/model/${name}`);
+          }}
+          variant="outline"
+        >
+          Go Back
+        </Button>
+        <Button variant="primary">Save</Button>
+      </div>
+    </section>
   );
 };
 
