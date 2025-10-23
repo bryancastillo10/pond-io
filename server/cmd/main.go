@@ -8,5 +8,8 @@ import (
 func main() {
 	config .LoadEnvVariables()
 
+	infrastructure.ConnectDB()
+	defer infrastructure.DisconnectMongo()
+
 	infrastructure.RunGin(config.CORS())
 }
