@@ -19,13 +19,13 @@ type EffluentAndGas struct {
 }
 
 type SimulateUasbResponse struct {
+	MassCODLoad float64 `json:"massCODLoad"` // kg COD
 	MassCODRemoved float64 `json:"massCODRemoved"` //kg/d
 	DimensionsResult Dimensions `json:"dimensions"`
 	EstimatedGasProduction	EstimatedGasProduction `json:"estGasProduction"`
 }
 
 type Dimensions struct {
-	MassCODLoad float64 `json:"massCODLoad"` // kg COD
 	Volume float64 `json:"volume"` //m3
 	HRT int32 `json:"hrt"` // h
 	CrossSectionalArea float64 `json:"crossSectionalArea"` // m2
@@ -35,6 +35,6 @@ type Dimensions struct {
 
 type EstimatedGasProduction struct {
 	MethaneFlow float64 `json:"methaneFlow"` // m3/d
-	Biogas float64	`json:"biogasFlow"` // m3/d
+	BiogasFlow float64	`json:"biogasFlow"` // m3/d
 	GasLoading float64 `json:"gasLoading"` // m3/ m2-d
 }
