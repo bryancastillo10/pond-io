@@ -1,6 +1,6 @@
 import useMBBRFormDrawers from "@/features/mbbr/hooks/useMBBRFormDrawers";
 import useMBBRDiagram from "@/features/mbbr/hooks/useMBBRDiagram";
-import { useMBBRFormContext } from "../context/MBBRFormContext";
+import { useMBBRFormContext } from "@/features/mbbr/context/MBBRFormContext";
 
 import EditFormButton from "@/components/ui/EditFormButton";
 import StartSimulationButton from "@/components/ui/StartSimulationButton";
