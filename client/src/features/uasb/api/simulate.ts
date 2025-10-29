@@ -13,7 +13,7 @@ export const uasbApi = createApi({
   endpoints: (build) => ({
     simulateUasb: build.mutation<SimulateUASBResponse, SimulateUASBRequest>({
       query: (data) => ({
-        url: "/mbbr",
+        url: "/uasb",
         method: "POST",
         body: data,
       }),
