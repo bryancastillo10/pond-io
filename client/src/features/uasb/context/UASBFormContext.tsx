@@ -83,7 +83,7 @@ export const UASBFormContextProvider = ({
         methaneFraction: Number(targetEffluent.methaneFraction),
       },
     }),
-    []
+    [parameters, targetEffluent]
   );
 
   const handleChange =
@@ -126,6 +126,10 @@ export const UASBFormContextProvider = ({
 
       const resId = uuidv4();
 
+      if (result) {
+        toast.success(result.message);
+      }
+
       navigate(`/model/${name}/result/${resId}`, {
         state: {
           model: name,
@@ -135,7 +139,7 @@ export const UASBFormContextProvider = ({
         },
       });
     } catch (error) {
-      toast.error(`Failed to simulate ${name}`);
+      toast.error(`Failed to simulate ${name?.toUpperCase()}`);
     }
   };
 

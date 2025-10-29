@@ -150,6 +150,10 @@ export const MBBRFormContextProvider = ({
 
       const resId = uuidv4();
 
+      if (result) {
+        toast.success(result.message);
+      }
+
       navigate(`/model/${name}/result/${resId}`, {
         state: {
           model: name,
@@ -158,10 +162,8 @@ export const MBBRFormContextProvider = ({
           output: result,
         },
       });
-
-      toast.success("Simulation is successful");
     } catch (error) {
-      toast.error(`Failed to simulate ${name}`);
+      toast.error(`Failed to simulate ${name?.toUpperCase()}`);
     }
   };
 
