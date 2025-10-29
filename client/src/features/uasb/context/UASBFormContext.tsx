@@ -1,4 +1,8 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+
+import { useSimulateUasbMutation } from "@/features/uasb/api/simulate";
 
 import { toast } from "sonner";
 
@@ -38,6 +42,9 @@ interface UASBFormContextType {
     group: keyof FormCompletion<boolean>,
     handleCloseDrawer: () => void
   ) => void;
+  handleSimulate: () => Promise<void>;
+  isError: boolean;
+  isLoading: boolean;
 }
 
 const UASBFormContext = createContext<UASBFormContextType | null>(null);
@@ -52,10 +59,32 @@ export const UASBFormContextProvider = ({
     initialEffluentAndGasData
   );
 
+  const [simulateUasb, { isLoading, isError }] = useSimulateUasbMutation();
+
+  const navigate = useNavigate();
+  const { name } = useParams();
+
   const setters = {
     parameters: setParamaters,
     targetEffluent: setTragetEffluent,
   };
+
+  const uasbInput = useMemo(
+    () => ({
+      parameters: {
+        flowRate: Number(parameters.flowRate),
+        infCOD: Number(parameters.infCOD),
+        olr: Number(parameters.olr),
+        upflowVelocity: Number(parameters.upflowVelocity),
+      },
+      targetEffluent: {
+        codRemoval: Number(targetEffluent.effPercCODRemoval),
+        methaneYield: Number(targetEffluent.methaneYield),
+        methaneFraction: Number(targetEffluent.methaneFraction),
+      },
+    }),
+    []
+  );
 
   const handleChange =
     <
@@ -91,12 +120,34 @@ export const UASBFormContextProvider = ({
     }
   };
 
+  const handleSimulate = async () => {
+    try {
+      const result = await simulateUasb(uasbInput).unwrap();
+
+      const resId = uuidv4();
+
+      navigate(`/model/${name}/result/${resId}`, {
+        state: {
+          model: name,
+          id: resId,
+          input: uasbInput,
+          output: result,
+        },
+      });
+    } catch (error) {
+      toast.error(`Failed to simulate ${name}`);
+    }
+  };
+
   const contextValues: UASBFormContextType = {
     parameters,
     targetEffluent,
     formCompletion,
+    isLoading,
+    isError,
     handleChange,
     handleSave,
+    handleSimulate,
   };
 
   return (
