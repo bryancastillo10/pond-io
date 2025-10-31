@@ -1,18 +1,23 @@
-import NoSimulationFound from "@/app/NoSimulationFound";
-
 import { useLocation, useParams, useNavigate } from "react-router-dom";
+
+import NoSimulationFound from "@/features/save_simulation/components/NoSimulationFound";
+import useSaveSimulation from "@/features/save_simulation/hooks/useSaveSimulation";
+
 import { useAppSelector } from "@/lib/redux/hooks";
 
 import TextHeader from "@/components/static/TextHeader";
 import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+
 import { renderObject } from "@/utils/renderObject";
 
 const SimulationResult = () => {
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
-
   const { name } = useParams();
-  const navigate = useNavigate();
   const { state } = useLocation();
+  const { title, handleChangeTitle } = useSaveSimulation(name);
+
+  const navigate = useNavigate();
 
   if (!state) {
     return <NoSimulationFound />;
@@ -54,6 +59,12 @@ const SimulationResult = () => {
               : renderObject(output)}
           </div>
         </div>
+
+        <Input
+          label="Simulation Title"
+          value={title}
+          onChange={handleChangeTitle}
+        />
       </section>
       <div className="mt-10 flex w-full justify-center lg:mt-8 lg:justify-end items-center gap-4">
         <Button

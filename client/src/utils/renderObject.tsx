@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/lib/redux/hooks";
 
 import { mbbrKeyLabels } from "@/features/mbbr/constants/parameterKeys";
+import { uasbKeyLabels } from "@/features/uasb/constants/parameterKeys";
 
 export const renderObject = (obj: Record<string, any>, level = 0) => {
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
@@ -8,7 +9,7 @@ export const renderObject = (obj: Record<string, any>, level = 0) => {
   return (
     <div className={`${level > 0 ? "ml-4 pl-4 " : ""} `}>
       {Object.entries(obj).map(([key, value]) => {
-        const label = mbbrKeyLabels[key] || key;
+        const label = mbbrKeyLabels[key] || uasbKeyLabels[key] || key;
         const isObject =
           value &&
           typeof value === "object" &&
