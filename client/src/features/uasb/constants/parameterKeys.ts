@@ -2,6 +2,7 @@ export const uasbKeyLabels: Record<string, string> = {
   parameters: "Parameters",
   targetEffluent: "Target Effluent",
   estGasProduction: "Estimated Gas Production",
+  dimensions: "Dimensions",
   flowRate: "Flow Rate (m³/d)",
   infCOD: "Influent COD (mg/L)",
   olr: "Organic Loading Rate (kg COD/m³ d)",

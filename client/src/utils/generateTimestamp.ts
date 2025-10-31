@@ -6,5 +6,5 @@ export function generateTimestamp() {
   const hour = String(now.getHours()).padStart(2, "0");
   const minute = String(now.getMinutes()).padStart(2, "0");
 
-  return `${year}${month}${day}/${hour}${minute}`;
+  return `${year}${month}${day}-${hour}${minute}`;
 }
