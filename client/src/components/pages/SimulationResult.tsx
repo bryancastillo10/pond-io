@@ -3,23 +3,22 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import NoSimulationFound from "@/features/save_simulation/components/NoSimulationFound";
 import useSaveSimulation from "@/features/save_simulation/hooks/useSaveSimulation";
 
-import { useAppSelector } from "@/lib/redux/hooks";
-
 import TextHeader from "@/components/static/TextHeader";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
-import { renderObject } from "@/utils/renderObject";
+import InputResultCard from "@/features/save_simulation/components/InputResultCard";
+import OutputResultCard from "@/features/save_simulation/components/OutputResultCard";
 
 const SimulationResult = () => {
-  const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
-  const { name } = useParams();
+  const { id, name } = useParams();
   const { state } = useLocation();
-  const { title, handleChangeTitle } = useSaveSimulation(name);
+  const { title, saveSimulationRecord, handleChangeTitle } =
+    useSaveSimulation(name);
 
   const navigate = useNavigate();
 
-  if (!state) {
+  if (!state || !id) {
     return <NoSimulationFound />;
   }
 
@@ -36,29 +35,9 @@ const SimulationResult = () => {
         />
       </div>
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div>
-          <h2 className="font-semibold mb-2">Input Parameters</h2>
-          <div
-            className={`p-4 rounded-lg border border-text ${
-              isDarkMode ? "bg-accent" : "bg-gray-50"
-            }`}
-          >
-            {renderObject(input)}
-          </div>
-        </div>
+        <InputResultCard input={input} />
 
-        <div>
-          <h2 className="font-semibold mb-2">Output Results</h2>
-          <div
-            className={`p-4 rounded-lg border border-text ${
-              isDarkMode ? "bg-primary" : "bg-gray-50"
-            }`}
-          >
-            {output?.result
-              ? renderObject(output.result)
-              : renderObject(output)}
-          </div>
-        </div>
+        <OutputResultCard output={output} />
 
         <Input
           label="Simulation Title"
@@ -75,7 +54,12 @@ const SimulationResult = () => {
         >
           Go Back
         </Button>
-        <Button variant="primary">Save</Button>
+        <Button
+          action={() => saveSimulationRecord({ id, input, output })}
+          variant="primary"
+        >
+          Save
+        </Button>
       </div>
     </section>
   );
