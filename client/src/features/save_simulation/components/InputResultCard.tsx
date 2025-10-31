@@ -2,7 +2,7 @@ import { useAppSelector } from "@/lib/redux/hooks";
 
 import { renderObject } from "@/utils/renderObject";
 
-const InputResultCard = (input: { input: Record<string, any> }) => {
+const InputResultCard = ({ input }: { input: Record<string, any> }) => {
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   return (
