@@ -3,11 +3,7 @@ import { useState } from "react";
 import { generateTimestamp } from "@/utils/generateTimestamp";
 import { toast } from "sonner";
 
-interface SimulationResults {
-  id: string;
-  input: Record<string, any>;
-  output: Record<string, any>;
-}
+import { type BaseSimulationResults } from "@/features/save_simulation/api/interface";
 
 const useSaveSimulation = (name: string | undefined) => {
   const [title, setTitle] = useState<string>(
@@ -18,7 +14,7 @@ const useSaveSimulation = (name: string | undefined) => {
     setTitle(e.target.value);
   };
 
-  const saveSimulationRecord = async (results: SimulationResults) => {
+  const saveSimulationRecord = async (results: BaseSimulationResults) => {
     try {
       const payload = {
         id: results.id,
