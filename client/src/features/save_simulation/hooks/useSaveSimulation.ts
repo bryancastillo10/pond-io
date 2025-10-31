@@ -1,6 +1,13 @@
 import { useState } from "react";
 
 import { generateTimestamp } from "@/utils/generateTimestamp";
+import { toast } from "sonner";
+
+interface SimulationResults {
+  id: string;
+  input: Record<string, any>;
+  output: Record<string, any>;
+}
 
 const useSaveSimulation = (name: string | undefined) => {
   const [title, setTitle] = useState<string>(
@@ -11,9 +18,28 @@ const useSaveSimulation = (name: string | undefined) => {
     setTitle(e.target.value);
   };
 
+  const saveSimulationRecord = async (results: SimulationResults) => {
+    try {
+      const payload = {
+        id: results.id,
+        title,
+        model: name,
+        input: results.input,
+        output: results.output.result,
+      };
+
+      console.log(payload);
+
+      toast.success("A simulation record was saved");
+    } catch (error) {
+      toast.error("Failed to save the simulation");
+    }
+  };
+
   return {
     title,
     handleChangeTitle,
+    saveSimulationRecord,
   };
 };
 

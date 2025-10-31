@@ -11,13 +11,14 @@ import InputResultCard from "@/features/save_simulation/components/InputResultCa
 import OutputResultCard from "@/features/save_simulation/components/OutputResultCard";
 
 const SimulationResult = () => {
-  const { name } = useParams();
+  const { id, name } = useParams();
   const { state } = useLocation();
-  const { title, handleChangeTitle } = useSaveSimulation(name);
+  const { title, saveSimulationRecord, handleChangeTitle } =
+    useSaveSimulation(name);
 
   const navigate = useNavigate();
 
-  if (!state) {
+  if (!state || !id) {
     return <NoSimulationFound />;
   }
 
@@ -53,7 +54,12 @@ const SimulationResult = () => {
         >
           Go Back
         </Button>
-        <Button variant="primary">Save</Button>
+        <Button
+          action={() => saveSimulationRecord({ id, input, output })}
+          variant="primary"
+        >
+          Save
+        </Button>
       </div>
     </section>
   );
