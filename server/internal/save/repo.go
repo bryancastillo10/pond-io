@@ -1,6 +1,11 @@
 package save
 
-import "go.mongodb.org/mongo-driver/mongo"
+import (
+	"context"
+	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
+)
 
 
 type Repository struct {
@@ -11,6 +16,18 @@ func NewRepository (db *mongo.Database) *Repository {
 	return &Repository{db: db}
 }
 
-func (r *Repository) SaveRecord () {
+func (r *Repository) SaveSimulationRecord (ctx context.Context, req SaveSimulationRecordRequest) error {
+	collection := r.db.Collection("simulations")
 
+	doc := map[string]interface{}{
+		"id": req.ID,
+		"title":req.Title,
+		"model":req.Model,
+		"input":req.Input,
+		"output":req.Output,
+		"createdAt": time.Now(),
+	}
+
+	_, err := collection.InsertOne(ctx, doc)
+	return err
 }

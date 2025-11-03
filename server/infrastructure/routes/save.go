@@ -10,5 +10,5 @@ import (
 func RegisterSaveRecords (r *gin.Engine, db *mongo.Database) {
 	saveHandler := save.NewHandler(db)
 
-	r.POST("/save/:model",  saveHandler.SaveRecords)
+	r.POST("/save/:model",  saveHandler.SaveSimulationRecords)
 }
