@@ -31,7 +31,7 @@ func RunGin(corsConfig cors.Config) {
 	r.Use(middleware.ErrorHandler())
 
 	// routes.RegisterRoutes(r, DB, RedisClient)
-	routes.RegisterRoutes(r)
+	routes.RegisterRoutes(r,DB)
 
 	err := r.Run("0.0.0.0:" + port)
 	if err != nil {

@@ -14,6 +14,7 @@ import (
 )
 
 var MongoClient *mongo.Client 
+var DB *mongo.Database
 
 func newMongoClient(uri string) (*mongo.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
