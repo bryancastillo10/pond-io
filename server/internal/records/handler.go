@@ -37,3 +37,18 @@ func (h *Handler) SaveSimulationRecords(c *gin.Context) {
 		Message: "Simulation result is saved successfully",
 	})
 }
+
+func (h *Handler) GetSimulationRecords(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message":"GET Simulation Records"} )
+}
+
+
+func (h *Handler) UpdateSimulationTitle(c *gin.Context) {
+	// id := c.Params("id")
+
+	c.JSON(http.StatusOK, gin.H{"message":"Update Simulation Title"})
+}
+
+func (h *Handler) DeleteSimulationRecord(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message":"DELETE Simulation Records"})
+}

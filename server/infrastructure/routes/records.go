@@ -8,7 +8,10 @@ import (
 )
 
 func RegisterSaveRecords (r *gin.Engine, db *mongo.Database) {
-	saveHandler := records.NewHandler(db)
+	recordsHandler := records.NewHandler(db)
 
-	r.POST("/save/:model",  saveHandler.SaveSimulationRecords)
+	r.POST("/records/:model",  recordsHandler.SaveSimulationRecords)
+	r.GET("/records", recordsHandler.GetSimulationRecords)
+	r.PUT("/records/:id", recordsHandler.UpdateSimulationTitle)
+	r.DELETE("/records/:id", recordsHandler.DeleteSimulationRecord)
 }
