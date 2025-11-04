@@ -1,4 +1,4 @@
-package save
+package records
 
 import (
 	"context"
@@ -17,7 +17,7 @@ func NewRepository (db *mongo.Database) *Repository {
 }
 
 func (r *Repository) SaveSimulationRecord (ctx context.Context, req SaveSimulationRecordRequest) error {
-	collection := r.db.Collection("simulations")
+	collection := r.db.Collection("Simulations")
 
 	doc := map[string]interface{}{
 		"id": req.ID,

@@ -1,4 +1,4 @@
-package save
+package records
 
 type SaveSimulationRecordRequest struct {
 	ID string `json:"id"`
