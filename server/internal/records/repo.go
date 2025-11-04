@@ -7,6 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 
@@ -79,8 +80,28 @@ func (r *Repository) GetSimulationRecords(ctx context.Context) ([]SaveSimulation
     return results, nil
 }
 
-func (r *Repository) UpdateSimulationTitle(ctx context.Context) {
+func (r *Repository) UpdateSimulationTitle(ctx context.Context, idHex string, title string) (SaveSimulationRecordRequest, error) {
+    collection := r.db.Collection("Simulations")
 
+    oid, err := primitive.ObjectIDFromHex(idHex)
+    if err != nil {
+        return SaveSimulationRecordRequest{}, err
+    }
+
+    filter := bson.M{"_id": oid}
+    update := bson.M{"$set": bson.M{
+        "title":     title,
+        "updatedAt": time.Now(),
+    }}
+    opts := options.FindOneAndUpdate().SetReturnDocument(options.After)
+
+    var updated SaveSimulationRecordRequest
+    err = collection.FindOneAndUpdate(ctx, filter, update, opts).Decode(&updated)
+    if err != nil {
+        return SaveSimulationRecordRequest{}, err
+    }
+
+    return updated, nil
 }
 
 func (r *Repository) DeleteSimulationRecord(ctx context.Context) {

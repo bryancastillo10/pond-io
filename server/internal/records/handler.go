@@ -1,7 +1,6 @@
 package records
 
 import (
-	"log"
 	"net/http"
 	http_helper "pond-io-server/pkg/http"
 
@@ -28,8 +27,7 @@ func (h *Handler) SaveSimulationRecords(c *gin.Context) {
 	}
 
 	if err := h.service.SaveSimulationRecord(*req); err != nil {
-		log.Printf("Save error: %v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.Error(err)
 		return
 	}
 
@@ -51,11 +49,26 @@ func (h *Handler) GetSimulationRecords(c *gin.Context) {
 
 
 func (h *Handler) UpdateSimulationTitle(c *gin.Context) {
-	// id := c.Params("id")
+	id := c.Param("id")
 
-	c.JSON(http.StatusOK, gin.H{"message":"Update Simulation Title"})
+
+	req, err := http_helper.BindJSON[UpdateSimulationTitleRequest](c)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	record, err := h.service.UpdateSimulationTitle(id, *req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(http.StatusOK, record)
 }
 
 func (h *Handler) DeleteSimulationRecord(c *gin.Context) {
+	// id := c.Param("id")
+
 	c.JSON(http.StatusOK, gin.H{"message":"DELETE Simulation Records"})
 }

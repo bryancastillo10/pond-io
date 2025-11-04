@@ -22,7 +22,7 @@ type UpdateSimulationTitleRequest struct {
 	Title string `json:"title"`
 }
 
-type UpdateSimulationTitleResponese struct {
+type UpdateSimulationTitleResponse struct {
 	Message string `json:"message"`
 	Title string `json:"title"`
 }

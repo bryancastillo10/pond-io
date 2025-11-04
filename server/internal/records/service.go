@@ -35,7 +35,21 @@ func (s *Service) GetSimulationRecords() (SimulationRecords, error) {
     return SimulationRecords{Records: records}, nil
 }
 
-func (s *Service) UpdateSimulationTitle() {
+func (s *Service) UpdateSimulationTitle(id string, req UpdateSimulationTitleRequest) (UpdateSimulationTitleResponse, error) {
+	if req.Title == "" {
+		return UpdateSimulationTitleResponse{}, appErr.NewBadRequest("Title is required", nil)
+	}
+
+	updated, err := s.repo.UpdateSimulationTitle(context.Background(), id, req.Title)
+	if err != nil {
+		return UpdateSimulationTitleResponse{}, err
+	}
+
+	return UpdateSimulationTitleResponse{
+			Message: "Simulation record title is updated",
+			Title: updated.Title,	
+	}, nil
+
 
 }
 
