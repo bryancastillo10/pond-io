@@ -48,6 +48,7 @@ func ConnectDB() {
 	}
 
 	MongoClient = client 
+	DB = client.Database(os.Getenv("MONGO_DB_NAME"))
 }
 
 
