@@ -1,7 +1,9 @@
 package records
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type SaveSimulationRecordRequest struct {
-	ID string `json:"id"`
+	ID primitive.ObjectID `json:"id"`
 	Title string `json:"title"`
 	Model string `json:"model"`
 	Input map[string]interface{}	`json:"input"`
@@ -9,5 +11,22 @@ type SaveSimulationRecordRequest struct {
 }
 
 type SaveSimulationRecordResponse struct {
+	Message string `json:"message"`
+}
+
+type SimulationRecords struct {
+	Records []SaveSimulationRecordRequest `json:"records"`
+}
+
+type UpdateSimulationTitleRequest struct {
+	Title string `json:"title"`
+}
+
+type UpdateSimulationTitleResponese struct {
+	Message string `json:"message"`
+	Title string `json:"title"`
+}
+
+type DeleteSimulationRecordResponse struct {
 	Message string `json:"message"`
 }

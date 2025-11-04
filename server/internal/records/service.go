@@ -24,3 +24,21 @@ func (s *Service) SaveSimulationRecord(req SaveSimulationRecordRequest) error {
 
 	return nil
 }
+
+
+func (s *Service) GetSimulationRecords() (SimulationRecords, error) {
+    records, err := s.repo.GetSimulationRecords(context.Background())
+    if err != nil {
+        return SimulationRecords{}, err
+    }
+
+    return SimulationRecords{Records: records}, nil
+}
+
+func (s *Service) UpdateSimulationTitle() {
+
+}
+
+func (s *Service) DeleteSimulationRecord() {
+
+}
