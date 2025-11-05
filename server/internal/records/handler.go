@@ -68,7 +68,13 @@ func (h *Handler) UpdateSimulationTitle(c *gin.Context) {
 }
 
 func (h *Handler) DeleteSimulationRecord(c *gin.Context) {
-	// id := c.Param("id")
+	id := c.Param("id")
 
-	c.JSON(http.StatusOK, gin.H{"message":"DELETE Simulation Records"})
+	resp, err := h.service.DeleteSimulationRecord(id); 
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(http.StatusOK, resp)
 }

@@ -53,6 +53,16 @@ func (s *Service) UpdateSimulationTitle(id string, req UpdateSimulationTitleRequ
 
 }
 
-func (s *Service) DeleteSimulationRecord() {
+func (s *Service) DeleteSimulationRecord(id string) (DeleteSimulationRecordResponse, error) {
+	if id == "" {
+		return DeleteSimulationRecordResponse{}, appErr.NewBadRequest("ID is required", nil)
+	}
 
+	if err := s.repo.DeleteSimulationRecord(context.Background(), id); err != nil {
+		return  DeleteSimulationRecordResponse{}, err
+	}	
+
+	return DeleteSimulationRecordResponse{
+		Message: "Simulation record has been deleted",
+	}, nil
 }

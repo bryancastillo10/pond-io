@@ -2,6 +2,7 @@ package records
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -23,7 +24,6 @@ func (r *Repository) SaveSimulationRecord (ctx context.Context, req SaveSimulati
 	collection := r.db.Collection("Simulations")
 
 	doc := map[string]interface{}{
-		"id": req.ID,
 		"title":req.Title,
 		"model":req.Model,
 		"input":req.Input,
@@ -104,6 +104,23 @@ func (r *Repository) UpdateSimulationTitle(ctx context.Context, idHex string, ti
     return updated, nil
 }
 
-func (r *Repository) DeleteSimulationRecord(ctx context.Context) {
+func (r *Repository) DeleteSimulationRecord(ctx context.Context, idHex string) error {
+    collection := r.db.Collection("Simulations")
 
+    oid, err := primitive.ObjectIDFromHex(idHex)
+    if err != nil {
+        return err
+    }
+
+    filter := bson.M{"_id": oid}
+    res, err := collection.DeleteOne(ctx, filter)
+    if err != nil {
+        return err
+    }
+
+    if res.DeletedCount == 0 {
+        return fmt.Errorf("No document found with id %s", idHex)
+    }
+
+    return nil
 }
