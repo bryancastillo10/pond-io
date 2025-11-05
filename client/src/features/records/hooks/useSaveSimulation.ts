@@ -3,7 +3,7 @@ import { useState } from "react";
 import { generateTimestamp } from "@/utils/generateTimestamp";
 import { toast } from "sonner";
 
-import { type BaseSimulationResults } from "@/features/save_simulation/api/interface";
+import { type BaseSimulationResults } from "@/features/records/api/interface";
 
 const useSaveSimulation = (name: string | undefined) => {
   const [title, setTitle] = useState<string>(

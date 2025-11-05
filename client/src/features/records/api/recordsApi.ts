@@ -27,7 +27,7 @@ export const recordsApi = createApi({
 
     getSimulation: build.query<GetSimulationRecordsResponse, void>({
       query: () => ({
-        url: "/",
+        url: "",
         method: "GET",
       }),
     }),
