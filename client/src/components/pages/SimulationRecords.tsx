@@ -1,21 +1,14 @@
 import { useGetSimulationQuery } from "@/features/records/api/recordsApi";
+import LoadingRecords from "@/features/records/components/LoadingRecords";
 
 const SimulationRecords = () => {
-  const {
-    data: simulationRecords,
-    isLoading,
-    isError,
-  } = useGetSimulationQuery();
+  const { data, isLoading, isError } = useGetSimulationQuery();
 
   if (isLoading) {
-    return (
-      <div className="">
-        <p>Loading Simulation Records</p>
-      </div>
-    );
+    return <LoadingRecords isLoading={isLoading} />;
   }
 
-  if (isError || !simulationRecords) {
+  if (isError || !data) {
     return (
       <div className="">
         <p>Error: No Simulation Records Recovered</p>
@@ -28,7 +21,7 @@ const SimulationRecords = () => {
       <h1>Simulation Records Here</h1>
 
       <div>
-        {simulationRecords?.records.map((record) => (
+        {data?.records.map((record) => (
           <p key={record.id}>{record.title}</p>
         ))}
       </div>
