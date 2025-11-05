@@ -1,14 +1,14 @@
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
-import NoSimulationFound from "@/features/save_simulation/components/NoSimulationFound";
-import useSaveSimulation from "@/features/save_simulation/hooks/useSaveSimulation";
+import NoSimulationFound from "@/features/records/components/NoSimulationFound";
+import useSaveSimulation from "@/features/records/hooks/useSaveSimulation";
 
 import TextHeader from "@/components/static/TextHeader";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
-import InputResultCard from "@/features/save_simulation/components/InputResultCard";
-import OutputResultCard from "@/features/save_simulation/components/OutputResultCard";
+import InputResultCard from "@/features/records/components/InputResultCard";
+import OutputResultCard from "@/features/records/components/OutputResultCard";
 
 const SimulationResult = () => {
   const { id, name } = useParams();
