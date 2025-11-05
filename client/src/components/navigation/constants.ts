@@ -15,9 +15,9 @@ const sidebarItems = [
   },
   {
     id: 3,
-    name: "Docs",
+    name: "Records",
     icon: FileText,
-    link: "/docs",
+    link: "/records",
   },
 ];
 
