@@ -12,3 +12,20 @@ export interface SaveSimulationRecordRequest extends BaseSimulationResults {
 export interface SaveSimulationRecordResponse {
   message: string;
 }
+
+export interface GetSimulationRecordsResponse {
+  records: SaveSimulationRecordRequest[];
+}
+
+export interface UpdateSimulationTitleRequest {
+  title: string;
+}
+
+export interface UpdateSimulationTitleResponse
+  extends UpdateSimulationTitleRequest {
+  message: string;
+}
+
+export interface DeleteSimulationRecordResponse {
+  message: string;
+}
