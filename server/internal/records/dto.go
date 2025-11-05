@@ -3,11 +3,11 @@ package records
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type SaveSimulationRecordRequest struct {
-	ID primitive.ObjectID `json:"id"`
-	Title string `json:"title"`
-	Model string `json:"model"`
-	Input map[string]interface{}	`json:"input"`
-	Output map[string]interface{}	`json:"output"`
+	ID      primitive.ObjectID       `bson:"_id,omitempty" json:"id"`
+    Title   string                   `bson:"title" json:"title"`
+    Model   string                   `bson:"model" json:"model"`
+    Input   map[string]interface{}   `bson:"input" json:"input"`
+    Output  map[string]interface{}   `bson:"output" json:"output"`
 }
 
 type SaveSimulationRecordResponse struct {
