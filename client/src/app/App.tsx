@@ -4,7 +4,7 @@ import {
   Home,
   ModelSimulation,
   About,
-  Documentation,
+  SimulationRecords,
   SimulationResult,
 } from "@/components/pages";
 import AppLayout from "@/app/AppLayout";
@@ -19,7 +19,9 @@ const App = () => {
         <Route path="/model/:name" element={<ModelSimulation />} />
         <Route path="/model/:name/result/:id" element={<SimulationResult />} />
         <Route path="/about" element={<About />} />
-        <Route path="/docs" element={<Documentation />} />
+        <Route path="/records" element={<SimulationRecords />}>
+          <Route path="/records/:id" />
+        </Route>
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
