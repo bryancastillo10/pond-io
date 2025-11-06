@@ -41,7 +41,7 @@ const SimulationRecords = () => {
         ))}
       </div>
 
-      <Outlet />
+      <Outlet context={{ records: data.records }} />
     </div>
   );
 };
