@@ -6,6 +6,8 @@ import {
   About,
   SimulationRecords,
   SimulationResult,
+  SavedSimulationRecord,
+  RecordsPlaceholder,
 } from "@/components/pages";
 import AppLayout from "@/app/AppLayout";
 import PageNotFound from "@/app/PageNotFound";
@@ -20,7 +22,8 @@ const App = () => {
         <Route path="/model/:name/result/:id" element={<SimulationResult />} />
         <Route path="/about" element={<About />} />
         <Route path="/records" element={<SimulationRecords />}>
-          <Route path="/records/:id" />
+          <Route index element={<RecordsPlaceholder />} />
+          <Route path="/records/:id" element={<SavedSimulationRecord />} />
         </Route>
       </Route>
       <Route path="*" element={<PageNotFound />} />

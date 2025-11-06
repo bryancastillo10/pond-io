@@ -19,7 +19,7 @@ const SimulationResult = () => {
   const navigate = useNavigate();
 
   if (!state || !id) {
-    return <NoSimulationFound />;
+    return <NoSimulationFound text="Result" />;
   }
 
   const { input, output } = state;
