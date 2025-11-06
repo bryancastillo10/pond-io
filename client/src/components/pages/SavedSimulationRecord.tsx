@@ -27,7 +27,7 @@ const SavedSimulationRecord = () => {
       } py-6 px-4 rounded-md`}
     >
       <h2 className="text-xl font-semibold mb-2">{record.title}</h2>
-      <p className="mb-1 font-medium">Model: {record.model}</p>
+      <p className="mb-1 font-medium">Model: {record.model.toUpperCase()}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="mt-4">
