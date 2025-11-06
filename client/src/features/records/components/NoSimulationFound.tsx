@@ -3,7 +3,11 @@ import { useAppSelector } from "@/lib/redux/hooks";
 
 import Button from "@/components/ui/Button";
 
-const NoSimulationFound = () => {
+interface NoSimulationFoundProps {
+  text: "Result" | "Records";
+}
+
+const NoSimulationFound = ({ text }: NoSimulationFoundProps) => {
   const darkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   const navigate = useNavigate();
@@ -18,7 +22,9 @@ const NoSimulationFound = () => {
           }
       `}
     >
-      <h1 className="font-semibold">No Simulation Result Found ☹️</h1>
+      <h1 className="font-semibold">
+        {`No Simulation ${text === "Result" ? "Result" : "Records"} Found ☹️`}
+      </h1>
       <div className="mt-4">
         <Button action={() => navigate("/model")} variant="primary">
           Go Back To Home
