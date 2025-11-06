@@ -5,6 +5,7 @@ import About from "./About";
 import SimulationRecords from "./SimulationRecords";
 import SavedSimulationRecord from "./SavedSimulationRecord";
 import SimulationResult from "./SimulationResult";
+import RecordsPlaceholder from "./RecordsPlaceholder";
 
 export {
   Welcome,
@@ -14,4 +15,5 @@ export {
   SimulationRecords,
   SavedSimulationRecord,
   SimulationResult,
+  RecordsPlaceholder,
 };
