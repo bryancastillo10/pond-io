@@ -7,7 +7,7 @@ const SavedSimulationRecord = () => {
 
   return (
     <div
-      className={`bg-gradient-to-b ${
+      className={`bg-gradient-to-b flex justify-center items-center ${
         isDarkMode
           ? "from-dark-secondary to-dark-accent text-dark-text"
           : "from-primary to-accent text-background"

@@ -27,7 +27,7 @@ const SimulationRecords = () => {
           <button
             key={record.id}
             onClick={() => navigate(`/records/${record.id}`)}
-            className="w-full text-left border border-gray-300 rounded-xl  p-4 shadow-sm hover:shadow-md hover:border-blue-accent transition-all duration-200"
+            className="w-full text-left border cursor-pointer border-gray-300 rounded-xl  p-4 shadow-sm hover:shadow-md hover:border-blue-accent transition-all duration-200"
           >
             <h2 className="text-lg font-semibold truncate">
               {record.title || "Untitled Simulation"}
