@@ -38,6 +38,10 @@ interface UASBFormContextType {
     group: T,
     field: K
   ) => (value: string) => void;
+  handleCancel: (
+    group: "parameters" | "targetEffluent",
+    handleCloseDrawer: () => void
+  ) => void;
   handleSave: (
     group: keyof FormCompletion<boolean>,
     handleCloseDrawer: () => void
@@ -55,7 +59,7 @@ export const UASBFormContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [parameters, setParamaters] = useState(initialOperationalData);
-  const [targetEffluent, setTragetEffluent] = useState(
+  const [targetEffluent, setTargetEffluent] = useState(
     initialEffluentAndGasData
   );
 
@@ -66,7 +70,7 @@ export const UASBFormContextProvider = ({
 
   const setters = {
     parameters: setParamaters,
-    targetEffluent: setTragetEffluent,
+    targetEffluent: setTargetEffluent,
   };
 
   const uasbInput = useMemo(
@@ -109,6 +113,21 @@ export const UASBFormContextProvider = ({
     [parameters, targetEffluent]
   );
 
+  const handleCancel = (
+    group: keyof typeof setters,
+    handleCloseDrawer: () => void
+  ) => {
+    if (group === "parameters") {
+      setParamaters(initialOperationalData);
+    } else if (group === "targetEffluent") {
+      setTargetEffluent(initialEffluentAndGasData);
+    } else {
+      console.warn(`No initial value found for group ${group}`);
+    }
+
+    handleCloseDrawer();
+  };
+
   const handleSave = (
     group: keyof typeof formCompletion,
     handleCloseDrawer: () => void
@@ -150,6 +169,7 @@ export const UASBFormContextProvider = ({
     isLoading,
     isError,
     handleChange,
+    handleCancel,
     handleSave,
     handleSimulate,
   };

@@ -6,7 +6,8 @@ import Button from "@/components/ui/Button";
 
 const UASBEffluentAndGas = () => {
   const { handleCloseDrawer } = useDrawer();
-  const { targetEffluent, handleSave, handleChange } = useUASBFormContext();
+  const { targetEffluent, handleCancel, handleSave, handleChange } =
+    useUASBFormContext();
 
   return (
     <form className="grid grid-cols-1">
@@ -37,7 +38,10 @@ const UASBEffluentAndGas = () => {
       />
 
       <div className="flex justify-between gap-4 w-fit">
-        <Button action={handleCloseDrawer} variant="danger">
+        <Button
+          action={() => handleCancel("targetEffluent", handleCloseDrawer)}
+          variant="danger"
+        >
           Cancel
         </Button>
         <Button

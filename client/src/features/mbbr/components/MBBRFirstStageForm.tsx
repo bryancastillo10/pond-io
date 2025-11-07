@@ -7,7 +7,8 @@ import Button from "@/components/ui/Button";
 const MBBRFirstStageForm = () => {
   const { handleCloseDrawer } = useDrawer();
 
-  const { firstStageData, handleSave, handleChange } = useMBBRFormContext();
+  const { firstStageData, handleCancel, handleSave, handleChange } =
+    useMBBRFormContext();
 
   return (
     <form className="grid grid-cols-1">
@@ -57,7 +58,10 @@ const MBBRFirstStageForm = () => {
       />
 
       <div className="flex justify-between gap-4 w-fit">
-        <Button action={handleCloseDrawer} variant="danger">
+        <Button
+          action={() => handleCancel("firstStageData", handleCloseDrawer)}
+          variant="danger"
+        >
           Cancel
         </Button>
         <Button
