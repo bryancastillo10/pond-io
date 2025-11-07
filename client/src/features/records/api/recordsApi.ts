@@ -16,7 +16,7 @@ export const recordsApi = createApi({
   endpoints: (build) => ({
     saveSimulation: build.mutation<
       SaveSimulationRecordResponse,
-      SaveSimulationRecordRequest
+      Omit<SaveSimulationRecordRequest, "id">
     >({
       query: (data) => ({
         url: `/${data.model}`,
