@@ -4,6 +4,7 @@ import { useMBBRFormContext } from "@/features/mbbr/context/MBBRFormContext";
 
 import EditFormButton from "@/components/ui/EditFormButton";
 import StartSimulationButton from "@/components/ui/StartSimulationButton";
+import LoadingSimulation from "@/components/static/LoadingSimulation";
 
 const Diagram = () => {
   const { mbbrRef } = useMBBRDiagram();
@@ -15,7 +16,11 @@ const Diagram = () => {
     openEffluentForm,
   } = useMBBRFormDrawers();
 
-  const { formCompletion, handleSimulate } = useMBBRFormContext();
+  const { formCompletion, isLoading, handleSimulate } = useMBBRFormContext();
+
+  if (isLoading) {
+    return <LoadingSimulation />;
+  }
 
   return (
     <div className="relative rounded-lg border overflow-x-scroll shadow-md my-2 w-full h-[75vh] mx-auto flex justify-center items-center">
