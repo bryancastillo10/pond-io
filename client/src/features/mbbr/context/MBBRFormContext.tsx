@@ -50,6 +50,10 @@ interface MBBRFormContextType {
     group: T,
     field: K
   ) => (value: string) => void;
+  handleCancel: (
+    group: "infData" | "effData" | "firstStageData" | "secondStageData",
+    handleCloseDrawer: () => void
+  ) => void;
   handleSave: (
     group: keyof FormCompletion<boolean>,
     handleCloseDrawer: () => void
@@ -133,6 +137,25 @@ export const MBBRFormContextProvider = ({
     [infData, firstStageData, secondStageData, effData]
   );
 
+  const handleCancel = (
+    group: keyof typeof setters,
+    handleCloseDrawer: () => void
+  ) => {
+    if (group === "infData") {
+      setInfData(initialInfData);
+    } else if (group === "effData") {
+      setEffData(initialEffPercData);
+    } else if (group === "firstStageData") {
+      setFirstStageData(mbbrStageData);
+    } else if (group === "secondStageData") {
+      setSecondStageData(mbbrStageData);
+    } else {
+      console.warn(`No initial value found for group ${group}`);
+    }
+
+    handleCloseDrawer();
+  };
+
   const handleSave = (
     group: keyof typeof formCompletion,
     handleCloseDrawer: () => void
@@ -177,6 +200,7 @@ export const MBBRFormContextProvider = ({
     isLoading,
     isError,
     handleChange,
+    handleCancel,
     handleSave,
     handleSimulate,
   };
