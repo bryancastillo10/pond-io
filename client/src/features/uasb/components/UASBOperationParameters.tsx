@@ -6,7 +6,8 @@ import Button from "@/components/ui/Button";
 
 const UASBOperationParameters = () => {
   const { handleCloseDrawer } = useDrawer();
-  const { parameters, handleSave, handleChange } = useUASBFormContext();
+  const { parameters, handleCancel, handleSave, handleChange } =
+    useUASBFormContext();
 
   return (
     <form className="grid grid-cols-1">
@@ -45,7 +46,12 @@ const UASBOperationParameters = () => {
       />
 
       <div className="flex justify-between gap-4 w-fit">
-        <Button action={handleCloseDrawer} variant="danger">
+        <Button
+          action={() => {
+            handleCancel("parameters", handleCloseDrawer);
+          }}
+          variant="danger"
+        >
           Cancel
         </Button>
         <Button

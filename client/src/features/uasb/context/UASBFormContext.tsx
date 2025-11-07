@@ -59,7 +59,7 @@ export const UASBFormContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [parameters, setParamaters] = useState(initialOperationalData);
-  const [targetEffluent, setTragetEffluent] = useState(
+  const [targetEffluent, setTargetEffluent] = useState(
     initialEffluentAndGasData
   );
 
@@ -70,7 +70,7 @@ export const UASBFormContextProvider = ({
 
   const setters = {
     parameters: setParamaters,
-    targetEffluent: setTragetEffluent,
+    targetEffluent: setTargetEffluent,
   };
 
   const uasbInput = useMemo(
@@ -120,7 +120,7 @@ export const UASBFormContextProvider = ({
     if (group === "parameters") {
       setParamaters(initialOperationalData);
     } else if (group === "targetEffluent") {
-      setTragetEffluent(initialEffluentAndGasData);
+      setTargetEffluent(initialEffluentAndGasData);
     } else {
       console.warn(`No initial value found for group ${group}`);
     }
