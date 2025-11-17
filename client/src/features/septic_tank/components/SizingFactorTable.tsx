@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-table";
 
 import { type SizingFactorRow } from "@/features/septic_tank/constants/sizingFactor";
-import { sizingFactor as data } from "@/features/septic_tank/constants/sizingFactor";
+import { sizingFactorValues as data } from "@/features/septic_tank/constants/sizingFactor";
 
 const columnHelper = createColumnHelper<SizingFactorRow>();
 
