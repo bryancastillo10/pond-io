@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { CircleX, Info } from "lucide-react";
 
+import { useAppSelector } from "@/lib/redux/hooks";
+
 interface NumberInputProps {
   label: string;
   value: number | string;
@@ -25,6 +27,7 @@ const NumberInput = ({
   helperText,
 }: NumberInputProps) => {
   const [error, setError] = useState("");
+  const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -95,7 +98,11 @@ const NumberInput = ({
 
       <p
         className={`mt-1 text-sm flex items-center gap-1 min-h-[1.25rem] ${
-          error ? "text-rose-500" : "text-secondary"
+          error
+            ? "text-rose-500"
+            : isDarkMode
+            ? "text-secondary"
+            : "text-background"
         }`}
       >
         {error ? (
