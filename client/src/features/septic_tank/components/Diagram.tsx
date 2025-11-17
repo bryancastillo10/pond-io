@@ -14,11 +14,11 @@ const Diagram = () => {
         isFormCompleted={false}
       />
 
-      <EditFormButton
+      {/* <EditFormButton
         openDrawer={() => {}}
         position="absolute left-[30%] md:left-[38%] top-[20%]"
         isFormCompleted={false}
-      />
+      /> */}
 
       <canvas ref={septicTankRef} width={1000} height={400} />
 
