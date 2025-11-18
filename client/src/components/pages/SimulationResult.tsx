@@ -35,9 +35,9 @@ const SimulationResult = () => {
         />
       </div>
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <InputResultCard input={input} />
+        <InputResultCard input={input} headerTextColor="text-primary" />
 
-        <OutputResultCard output={output} />
+        <OutputResultCard output={output} headerTextColor="text-primary" />
 
         <Input
           label="Simulation Title"
