@@ -1,7 +1,15 @@
+import { useSepticTankFormContext } from "@/features/septic_tank/context/SepticTankFormContext";
+import useDrawer from "@/lib/drawer-ui/useDrawer";
+
 import Button from "@/components/ui/Button";
 import NumberInput from "@/components/ui/NumberInput";
 
 const SepticTankWaterQualityForm = () => {
+  const { handleCloseDrawer } = useDrawer();
+
+  const { operationsData, handleCancel, handleSave, handleChange } =
+    useSepticTankFormContext();
+
   return (
     <form className="grid grid-colls">
       <h3 className="my-2 font-semibold tracking-wider">
@@ -10,8 +18,8 @@ const SepticTankWaterQualityForm = () => {
 
       <NumberInput
         label="Estimated Number of Daily Users"
-        value=""
-        onChange={() => {}}
+        value={operationsData.numberOfUsers}
+        onChange={handleChange("operations", "numberOfUsers")}
         decimals={0}
         disabled={false}
         unit="persons"
@@ -19,8 +27,8 @@ const SepticTankWaterQualityForm = () => {
 
       <NumberInput
         label="Water Consumption per Person"
-        value=""
-        onChange={() => {}}
+        value={operationsData.waterConsumption}
+        onChange={handleChange("operations", "waterConsumption")}
         decimals={0}
         disabled={false}
         unit="L"
@@ -30,8 +38,8 @@ const SepticTankWaterQualityForm = () => {
 
       <NumberInput
         label="Assumed Water Depth"
-        value=""
-        onChange={() => {}}
+        value={operationsData.waterDepth}
+        onChange={handleChange("operations", "waterDepth")}
         decimals={2}
         disabled={false}
         unit="m"
@@ -40,8 +48,8 @@ const SepticTankWaterQualityForm = () => {
 
       <NumberInput
         label="Freeboard"
-        value=""
-        onChange={() => {}}
+        value={operationsData.allowanceDepth}
+        onChange={handleChange("operations", "allowanceDepth")}
         decimals={2}
         disabled={false}
         unit="m"
@@ -49,10 +57,16 @@ const SepticTankWaterQualityForm = () => {
       />
 
       <div className="flex justify-between mt-4 gap-4 w-fit">
-        <Button action={() => {}} variant="danger">
+        <Button
+          action={() => handleCancel("operations", handleCloseDrawer)}
+          variant="danger"
+        >
           Cancel
         </Button>
-        <Button action={() => {}} variant="primary">
+        <Button
+          action={() => handleSave("operationsData", handleCloseDrawer)}
+          variant="primary"
+        >
           Save
         </Button>
       </div>

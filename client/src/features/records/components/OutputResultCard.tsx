@@ -3,12 +3,26 @@ import { useAppSelector } from "@/lib/redux/hooks";
 import { AreaChart } from "lucide-react";
 import { renderObject } from "@/utils/renderObject";
 
-const OutputResultCard = ({ output }: { output: Record<string, any> }) => {
+interface OutputCardProps {
+  output: Record<string, any>;
+  headerTextColor?: string;
+}
+
+const OutputResultCard = ({
+  output,
+  headerTextColor = "text-background",
+}: OutputCardProps) => {
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
+
+  let finalHeaderTextColor = headerTextColor;
+
+  if (headerTextColor === "text-primary") {
+    finalHeaderTextColor = isDarkMode ? "text-secondary" : "text-primary";
+  }
 
   return (
     <div className={`${isDarkMode ? "text-background" : "text-text"}`}>
-      <div className="flex items-center gap-2 my-2 text-background">
+      <div className={`flex items-center gap-2 my-2 ${finalHeaderTextColor}`}>
         <AreaChart />
         <h2 className="font-semibold">Output Results</h2>
       </div>

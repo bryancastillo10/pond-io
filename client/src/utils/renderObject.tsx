@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/lib/redux/hooks";
 
 import { mbbrKeyLabels } from "@/features/mbbr/constants/parameterKeys";
+import { septicTankKeyLabels } from "@/features/septic_tank/constants/parameterKeys";
 import { uasbKeyLabels } from "@/features/uasb/constants/parameterKeys";
 
 export const renderObject = (obj: Record<string, any>, level = 0) => {
@@ -9,7 +10,11 @@ export const renderObject = (obj: Record<string, any>, level = 0) => {
   return (
     <div className={`${level > 0 ? "ml-4 pl-4 " : ""} `}>
       {Object.entries(obj).map(([key, value]) => {
-        const label = mbbrKeyLabels[key] || uasbKeyLabels[key] || key;
+        const label =
+          mbbrKeyLabels[key] ||
+          uasbKeyLabels[key] ||
+          septicTankKeyLabels[key] ||
+          key;
         const isObject =
           value &&
           typeof value === "object" &&

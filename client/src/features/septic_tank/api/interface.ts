@@ -19,15 +19,20 @@ interface DesignResult<T> {
   tankDepth: T;
 }
 
+interface SimulationResult {
+  calculatedInfo: CalculatedInformation<number>;
+  dimensions: DesignResult<number>;
+}
+
 export interface SimulateSepticTankRequest<T> {
   numberOfUsers: T;
   waterConsumption: T;
   waterDepth: T;
   allowanceDepth: T;
-  sludgeVolume: SludgeVolumeSpecifications<T>;
+  sludgeSpecs: SludgeVolumeSpecifications<T>;
 }
 
 export interface SimulateSepticTankResponse {
-  calculatedInfo: CalculatedInformation<number>;
-  dimensions: DesignResult<number>;
+  message: string;
+  result: SimulationResult;
 }

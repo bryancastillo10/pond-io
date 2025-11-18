@@ -1,11 +1,14 @@
 import useSepticTankFormDrawers from "@/features/septic_tank/hooks/useSepticTankFormDrawers";
 import useSepticTankDiagram from "@/features/septic_tank/hooks/useSepticTankDiagram";
+import { useSepticTankFormContext } from "@/features/septic_tank/context/SepticTankFormContext";
 
 import EditFormButton from "@/components/ui/EditFormButton";
 import StartSimulationButton from "@/components/ui/StartSimulationButton";
 
 const Diagram = () => {
   const { septicTankRef } = useSepticTankDiagram();
+
+  const { formCompletion, handleSimulate } = useSepticTankFormContext();
 
   const { openWaterQualityForm, openSludgeCharacteristicsForm } =
     useSepticTankFormDrawers();
@@ -15,7 +18,7 @@ const Diagram = () => {
       <EditFormButton
         openDrawer={openWaterQualityForm}
         position="absolute left-[10%] md:left-[28%] top-[20%]"
-        isFormCompleted={false}
+        isFormCompleted={formCompletion.operationsData}
       />
 
       <canvas ref={septicTankRef} width={1000} height={400} />
@@ -23,10 +26,10 @@ const Diagram = () => {
       <EditFormButton
         openDrawer={openSludgeCharacteristicsForm}
         position="absolute right-[28%] top-[20%]"
-        isFormCompleted={false}
+        isFormCompleted={formCompletion.sludgeSpecsData}
       />
 
-      <StartSimulationButton handleStart={() => {}} />
+      <StartSimulationButton handleStart={handleSimulate} />
     </div>
   );
 };

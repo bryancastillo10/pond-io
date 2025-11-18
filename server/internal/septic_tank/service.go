@@ -19,7 +19,7 @@ func (s *Service) SimulateSepticTank(req SimulateSepticTankRequest) (*SimulateSe
 	waterConsumption := req.WaterConsumption // L/person
 	waterDepth := req.WaterDepth  //m
 	allowanceDepth := req.AllowanceDepth //m
-	sludgeVolumeSpecs := req.SludgeVolume
+	sludgeSpecs := req.SludgeSpecification
 
 
 	if waterConsumption <= 0 {
@@ -31,9 +31,9 @@ func (s *Service) SimulateSepticTank(req SimulateSepticTankRequest) (*SimulateSe
 	retentionTime := estimateRetentionTime(dailyFlowRate)
 	estSepticTankVolume := dailyFlowRate * (24.0/retentionTime)
 	sludgeVolume := float64(numUsers) *
-		float64(sludgeVolumeSpecs.DesludgingPeriod) *
-		sludgeVolumeSpecs.SizingFactor *
-		(float64(sludgeVolumeSpecs.AccumulationRate) / 1000.0)
+		float64(sludgeSpecs.DesludgingPeriod) *
+		sludgeSpecs.SizingFactor *
+		(float64(sludgeSpecs.AccumulationRate) / 1000.0)
 
 	// --- Design Calculation
 	totalSepticTankVolume := estSepticTankVolume + sludgeVolume
