@@ -81,7 +81,7 @@ export const SepticTankFormContextProvider = ({
       waterConsumption: Number(operationsData.waterConsumption),
       waterDepth: Number(operationsData.waterDepth),
       allowanceDepth: Number(operationsData.allowanceDepth),
-      sludgeVolume: {
+      sludgeSpecs: {
         desludgingPeriod: Number(sludgeSpecs.desludgingPeriod),
         accumulationRate: Number(sludgeSpecs.accumulationRate),
         sizingFactor: Number(sludgeSpecs.sizingFactor),
