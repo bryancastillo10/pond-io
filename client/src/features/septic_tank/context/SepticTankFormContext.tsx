@@ -1,4 +1,9 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+
+import { useSimulateSepticTankMutation } from "@/features/septic_tank/api/simulate";
+
 import { toast } from "sonner";
 
 const initialSludgeSpecs = {
@@ -42,6 +47,9 @@ interface SepticTankFormContextType {
     group: keyof FormCompletion<boolean>,
     handleCloseDrawer: () => void
   ) => void;
+  handleSimulate: () => Promise<void>;
+  isError: boolean;
+  isLoading: boolean;
 }
 
 const SepticTankFormContext = createContext<SepticTankFormContextType | null>(
@@ -55,6 +63,12 @@ export const SepticTankFormContextProvider = ({
 }) => {
   const [operationsData, setOperationsData] = useState(initialOperation);
   const [sludgeSpecs, setSludgeSpecs] = useState(initialSludgeSpecs);
+
+  const [simulateSepticTank, { isLoading, isError }] =
+    useSimulateSepticTankMutation();
+
+  const navigate = useNavigate();
+  const { name } = useParams();
 
   const setters = {
     operations: setOperationsData,
@@ -125,14 +139,40 @@ export const SepticTankFormContextProvider = ({
     }
   };
 
+  const handleSimulate = async () => {
+    try {
+      const result = await simulateSepticTank(septicTankInput).unwrap();
+
+      const resId = uuidv4();
+
+      if (result) {
+        toast.success(result.message);
+      }
+
+      navigate(`/model/${name}/result/${resId}`, {
+        state: {
+          model: name,
+          id: resId,
+          input: septicTankInput,
+          output: result,
+        },
+      });
+    } catch (error) {
+      toast.error(`Failed to simulate ${name?.toUpperCase()}`);
+    }
+  };
+
   const contextValues: SepticTankFormContextType = {
     operationsData,
     sludgeSpecs,
     septicTankInput,
     formCompletion,
+    isError,
+    isLoading,
     handleChange,
     handleCancel,
     handleSave,
+    handleSimulate,
   };
 
   return (
