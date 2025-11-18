@@ -29,7 +29,7 @@ export interface SimulateSepticTankRequest<T> {
   waterConsumption: T;
   waterDepth: T;
   allowanceDepth: T;
-  sludgeVolume: SludgeVolumeSpecifications<T>;
+  sludgeSpecs: SludgeVolumeSpecifications<T>;
 }
 
 export interface SimulateSepticTankResponse {
