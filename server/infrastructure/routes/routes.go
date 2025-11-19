@@ -11,5 +11,6 @@ func RegisterRoutes(r *gin.Engine, db *mongo.Database) {
 	})
 
 	RegisterSaveRecords(r, db)
+	RegisterSimulationModelRoutes(r,db)
 	RegisterSimulationRoutes(r)
 }
