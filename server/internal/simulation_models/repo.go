@@ -3,6 +3,7 @@ package simulationmodels
 import (
 	"context"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -34,7 +35,7 @@ func (r *Repository) AddSimulationModel(ctx context.Context, req AddModelRequest
 		return nil, err
 	}
 
-	id := result.InsertedID.(primitive.ObjectID).Hex()
+	id := result.InsertedID.(primitive.ObjectID)
 
 	resp := &AddModelResponse{
 		ID: id,
@@ -43,4 +44,27 @@ func (r *Repository) AddSimulationModel(ctx context.Context, req AddModelRequest
 	}
 
 	return resp, nil
+}
+
+func (r* Repository) GetSimulationModels (ctx context.Context) (*[]GetSimulationModels ,error) {
+	collection := r.db.Collection("Models")
+
+	cur, err := collection.Find(ctx, bson.D{})
+	if err != nil {
+		return nil, err
+	}
+
+	defer cur.Close(ctx)
+
+	var models []GetSimulationModels
+
+	for cur.Next(ctx) {
+		var model GetSimulationModels
+		if err := cur.Decode(&model); err != nil {
+			return nil,err
+		}
+		models = append(models, model)
+	}
+
+	return &models, nil
 }

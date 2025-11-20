@@ -33,3 +33,14 @@ func (h *Handler) AddSimulationModel(c *gin.Context) {
 
 	c.JSON(200, gin.H{"message":"The simulation model added successfully","result":response})
 }
+
+func (h *Handler) GetSimulationModels(c *gin.Context) {
+
+	models, err := h.service.GetSimulationModels()
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(200, models)
+}

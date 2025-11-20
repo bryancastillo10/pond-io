@@ -25,3 +25,24 @@ func (s *Service) AddSimulationModel(req AddModelRequest) (*AddModelResponse, er
 
 	return model, nil
 }
+
+func (s *Service) GetSimulationModels() (GetSimulationModels, error) {
+	raw, err := s.repo.GetSimulationModels(context.Background())
+
+	if err != nil {
+        return GetSimulationModels{}, err
+    }
+
+	if raw == nil {
+        return GetSimulationModels{Models: []SimulationModels{}}, nil
+    }
+
+    var combined []SimulationModels
+    for _, item := range *raw {
+        if len(item.Models) > 0 {
+            combined = append(combined, item.Models...)
+        }
+    }
+
+    return GetSimulationModels{Models: combined}, nil
+}

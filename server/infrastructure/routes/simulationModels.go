@@ -13,7 +13,7 @@ func RegisterSimulationModelRoutes (r *gin.Engine, db *mongo.Database) {
 	simulationModelGroup := r.Group("/models")
 	{
 		simulationModelGroup.POST("/", modelsHandler.AddSimulationModel)
-		simulationModelGroup.GET("/")
+		simulationModelGroup.GET("/", modelsHandler.GetSimulationModels)
 		simulationModelGroup.PUT("/:id")
 		simulationModelGroup.DELETE("/id")
 	}
