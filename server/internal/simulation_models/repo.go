@@ -68,3 +68,11 @@ func (r* Repository) GetSimulationModels (ctx context.Context) ([]SimulationMode
 
 	return models, nil
 }
+
+func (r *Repository) UpdateSimulationModel() {
+
+}
+
+func (r *Repository) DeleteSimulationModel() {
+
+}

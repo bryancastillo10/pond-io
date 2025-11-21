@@ -44,3 +44,12 @@ func (h *Handler) GetSimulationModels(c *gin.Context) {
 
 	c.JSON(200, models)
 }
+
+func (h *Handler) UpdateSimulationModel(c *gin.Context) {
+
+}
+
+
+func (h *Handler) DeleteSimulationModel(c *gin.Context) {
+
+}

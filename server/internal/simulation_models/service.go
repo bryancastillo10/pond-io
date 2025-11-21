@@ -37,3 +37,11 @@ func (s *Service) GetSimulationModels() (GetSimulationModels, error) {
 		Models: models,
 	}, nil
 }
+
+func (s *Service) UpdateSimulationModel() {
+
+}
+
+func (s *Service) DeleteSimulationModel() {
+
+}
