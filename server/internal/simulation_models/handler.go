@@ -44,3 +44,34 @@ func (h *Handler) GetSimulationModels(c *gin.Context) {
 
 	c.JSON(200, models)
 }
+
+func (h *Handler) UpdateSimulationModel(c *gin.Context) {
+	id := c.Param("id")
+
+	req, err := http_helper.BindJSON[SimulationModels](c)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	model, err := h.service.UpdateSimulationModel(id, *req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(200, model)
+}
+
+
+func (h *Handler) DeleteSimulationModel(c *gin.Context) {
+	id := c.Param("id")
+
+	resp, err := h.service.DeleteSimulationModel(id)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(200, resp)
+}

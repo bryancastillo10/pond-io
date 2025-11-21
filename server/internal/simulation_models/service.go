@@ -27,22 +27,44 @@ func (s *Service) AddSimulationModel(req AddModelRequest) (*AddModelResponse, er
 }
 
 func (s *Service) GetSimulationModels() (GetSimulationModels, error) {
-	raw, err := s.repo.GetSimulationModels(context.Background())
+	models, err := s.repo.GetSimulationModels(context.Background())
 
 	if err != nil {
         return GetSimulationModels{}, err
     }
 
-	if raw == nil {
-        return GetSimulationModels{Models: []SimulationModels{}}, nil
+	return GetSimulationModels{
+		Models: models,
+	}, nil
+}
+
+func (s *Service) UpdateSimulationModel(id string, req SimulationModels) (UpdateSimulationModelResponse, error) {
+ 	if req.Title == "" && req.Description == "" && req.Category == "" && req.Link == "" &&
+        len(req.ExpectedResults) == 0 && req.Image == "" && req.ImageAlt == "" {
+        return UpdateSimulationModelResponse{}, appErr.NewBadRequest("No fields provided to update", nil)
     }
 
-    var combined []SimulationModels
-    for _, item := range *raw {
-        if len(item.Models) > 0 {
-            combined = append(combined, item.Models...)
-        }
-    }
+	updated, err := s.repo.UpdateSimulationModel(context.Background(), id, req)
+	if err != nil {
+		return UpdateSimulationModelResponse{}, err
+	}	
+	
+	return UpdateSimulationModelResponse{
+		Message: "Simulation model was updated successfully",
+		UpdatedModel: updated,	
+	}, nil
+}
 
-    return GetSimulationModels{Models: combined}, nil
+func (s *Service) DeleteSimulationModel(id string) (DeleteSimulationModelResponse, error) {
+	if id == "" {
+		return DeleteSimulationModelResponse{}, appErr.NewBadRequest("ID is required", nil)
+	}
+
+	if err := s.repo.DeleteSimulationModel(context.Background(),id); err != nil {
+		return DeleteSimulationModelResponse{}, err
+	}
+
+	return DeleteSimulationModelResponse{
+		Message: "Simulation model has been deleted",
+	},nil
 }

@@ -32,3 +32,12 @@ type SimulationModels struct {
 type GetSimulationModels struct {
 	Models []SimulationModels `json:"models"`
 }
+
+type UpdateSimulationModelResponse struct {
+	Message string `json:"message"`
+	UpdatedModel SimulationModels `json:"updatedModel"`
+}
+
+type DeleteSimulationModelResponse struct {
+	Message string `json:"message"`
+}
