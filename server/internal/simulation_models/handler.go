@@ -46,7 +46,21 @@ func (h *Handler) GetSimulationModels(c *gin.Context) {
 }
 
 func (h *Handler) UpdateSimulationModel(c *gin.Context) {
+	id := c.Param("id")
 
+	req, err := http_helper.BindJSON[SimulationModels](c)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	model, err := h.service.UpdateSimulationModel(id, *req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(200, model)
 }
 
 

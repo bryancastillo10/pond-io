@@ -38,8 +38,21 @@ func (s *Service) GetSimulationModels() (GetSimulationModels, error) {
 	}, nil
 }
 
-func (s *Service) UpdateSimulationModel() {
+func (s *Service) UpdateSimulationModel(id string, req SimulationModels) (UpdateSimulationModelResponse, error) {
+ 	if req.Title == "" && req.Description == "" && req.Category == "" && req.Link == "" &&
+        len(req.ExpectedResults) == 0 && req.Image == "" && req.ImageAlt == "" {
+        return UpdateSimulationModelResponse{}, appErr.NewBadRequest("No fields provided to update", nil)
+    }
 
+	updated, err := s.repo.UpdateSimulationModel(context.Background(), id, req)
+	if err != nil {
+		return UpdateSimulationModelResponse{}, err
+	}	
+	
+	return UpdateSimulationModelResponse{
+		Message: "Simulation model was updated successfully",
+		UpdatedModel: updated,	
+	}, nil
 }
 
 func (s *Service) DeleteSimulationModel() {
