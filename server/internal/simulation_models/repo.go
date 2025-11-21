@@ -46,7 +46,7 @@ func (r *Repository) AddSimulationModel(ctx context.Context, req AddModelRequest
 	return resp, nil
 }
 
-func (r* Repository) GetSimulationModels (ctx context.Context) (*[]GetSimulationModels ,error) {
+func (r* Repository) GetSimulationModels (ctx context.Context) ([]SimulationModels,error) {
 	collection := r.db.Collection("Models")
 
 	cur, err := collection.Find(ctx, bson.D{})
@@ -56,15 +56,15 @@ func (r* Repository) GetSimulationModels (ctx context.Context) (*[]GetSimulation
 
 	defer cur.Close(ctx)
 
-	var models []GetSimulationModels
+	var models []SimulationModels
 
 	for cur.Next(ctx) {
-		var model GetSimulationModels
+		var model SimulationModels
 		if err := cur.Decode(&model); err != nil {
 			return nil,err
 		}
 		models = append(models, model)
 	}
 
-	return &models, nil
+	return models, nil
 }
