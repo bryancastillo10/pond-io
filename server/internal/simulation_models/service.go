@@ -55,6 +55,16 @@ func (s *Service) UpdateSimulationModel(id string, req SimulationModels) (Update
 	}, nil
 }
 
-func (s *Service) DeleteSimulationModel() {
+func (s *Service) DeleteSimulationModel(id string) (DeleteSimulationModelResponse, error) {
+	if id == "" {
+		return DeleteSimulationModelResponse{}, appErr.NewBadRequest("ID is required", nil)
+	}
 
+	if err := s.repo.DeleteSimulationModel(context.Background(),id); err != nil {
+		return DeleteSimulationModelResponse{}, err
+	}
+
+	return DeleteSimulationModelResponse{
+		Message: "Simulation model has been deleted",
+	},nil
 }

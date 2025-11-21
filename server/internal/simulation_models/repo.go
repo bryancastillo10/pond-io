@@ -122,6 +122,24 @@ func (r *Repository) UpdateSimulationModel(ctx context.Context, idHex string, re
     return updated, nil
 }
 
-func (r *Repository) DeleteSimulationModel() {
+func (r *Repository) DeleteSimulationModel(ctx context.Context, idHex string) error {
+	collection := r.db.Collection("Models")
 
+	oid, err := primitive.ObjectIDFromHex(idHex)
+	if err != nil {
+		return err
+	}
+
+	filter := bson.M{"_id":oid}
+	res, err := collection.DeleteOne(ctx, filter)
+	
+	if err != nil{
+		return err
+	}
+
+	if res.DeletedCount == 0 {
+		return fmt.Errorf("No document found with id %s", idHex)
+	}
+
+	return nil
 }

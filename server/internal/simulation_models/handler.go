@@ -65,5 +65,13 @@ func (h *Handler) UpdateSimulationModel(c *gin.Context) {
 
 
 func (h *Handler) DeleteSimulationModel(c *gin.Context) {
+	id := c.Param("id")
 
+	resp, err := h.service.DeleteSimulationModel(id)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+
+	c.JSON(200, resp)
 }
